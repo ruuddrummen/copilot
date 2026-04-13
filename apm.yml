@@ -1,0 +1,12 @@
+name: copilot
+version: 1.0.0
+description: APM project for copilot
+author: Ruud Drummen
+dependencies:
+  apm:
+    - mattpocock/skills/write-a-prd
+    - mattpocock/skills/prd-to-issues
+    - mattpocock/skills/improve-codebase-architecture
+  mcp:
+    - io.github.upstash/context7
+scripts: {}
