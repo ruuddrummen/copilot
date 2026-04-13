@@ -4,6 +4,6 @@ description: This skill is used to guide Ralph, the AI assistant, through a focu
 disable-model-invocation: true
 ---
 
-1. Make sure a backlog item ID is provided and prompt the user otherwise.
-2. Repeat the following step until all tasks under the backlog item are completed:
-   - Create a sub agent with the [ralph-prompt](./assets/ralph-prompt.md) (verbatim), [config.json](./assets/config.json) and the backlog item ID to select a task and work on it autonomously. Let the sub agent choose which task to work on.
+1. Make sure an issue ID is provided and prompt the user otherwise.
+2. Repeat the following step until all tasks under the issue are completed:
+   - Create a sub agent with the [ralph-prompt](./assets/ralph-prompt.md) (verbatim) and the issue ID to select a task and work on it autonomously. Let the sub agent choose which task to work on.
