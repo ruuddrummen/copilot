@@ -54,9 +54,9 @@ Cycle through these phases based on input. This is iterative, not linear.
 
 Present complex findings as a **DRAFT**. On user input:
 
-- Changes requested → revise and present an updated draft.
+- Changes requested → revise and present an updated draft
 - Questions asked → clarify using #tool:vscode/askQuestions
-- Approval given → acknowledge; user can proceed via handoff to the Backlog Manager if a work item is needed.
+- Approval given → acknowledge
 
 </workflow>
 

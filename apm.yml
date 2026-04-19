@@ -4,8 +4,6 @@ description: APM project for copilot
 author: Ruud Drummen
 dependencies:
   apm:
-    - mattpocock/skills/to-prd
-    - mattpocock/skills/to-issues
     - mattpocock/skills/improve-codebase-architecture
   mcp:
     - io.github.upstash/context7
