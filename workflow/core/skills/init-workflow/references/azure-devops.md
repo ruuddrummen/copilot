@@ -39,9 +39,3 @@ This file contains all team-specific configuration for the backlog manager agent
 | Stakeholder | Description |
 |---|---|
 | {team_name} | {team_description} |
-| DevOps Teams | Implement integrations using Azure Integration Services |
-| IT4IT | Provide shared Azure platform infrastructure and self-service capabilities |
-| ISCC | Drive integration strategy, provide guidance and templates |
-| Architecture | Define architecture policies, review SAD/HLD documents |
-| IT Security | Ensure security compliance |
-| Risk & Compliance | Monitor governance and audit readiness |
