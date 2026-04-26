@@ -46,7 +46,7 @@ Keep as a single work item when:
 
 ### 4. File the work item(s)
 
-Create work items (as standalone work items, or as sub-work items when a parent work item exists). Do NOT ask the user to review first — just file and share URLs.
+Create work items using `gh issue create -t "Title" -b "Body"` (as standalone work items, or as sub-work items when a parent work item exists — see the `to-issues` skill for sub-issue attachment commands). Do NOT ask the user to review first — just file and share URLs.
 
 Work items must be **durable** — they should still make sense after major refactors. Write from the user's perspective.
 

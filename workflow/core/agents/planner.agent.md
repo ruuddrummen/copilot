@@ -6,12 +6,10 @@ tools:
     vscode/memory,
     vscode/toolSearch,
     read,
+    execute,
     ado-remote-mcp/wit_get_work_item,
     ado-remote-mcp/wit_get_work_items_batch_by_ids,
     ado-remote-mcp/wit_list_work_item_comments,
-    github/issue_read,
-    github/list_issues,
-    github/search_issues,
   ]
 model: Claude Sonnet 4.6 (copilot)
 user-invocable: false

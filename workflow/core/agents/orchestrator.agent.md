@@ -10,7 +10,6 @@ tools:
     agent,
     edit,
     search,
-    "github/*",
     "ado-remote-mcp/*",
     todo,
     execute,
@@ -106,6 +105,7 @@ When Developer or any subagent reports an error:
 
 ## Constraints
 
+- **GitHub operations**: Use `execute` with `gh` CLI commands for all GitHub operations (e.g. `gh issue create -t "Title" -b "Body"`, `gh issue list`, `gh issue view <ID> --comments`).
 - **Do NOT edit files** except to append to `LEARNINGS.md`.
 - **Do NOT make implementation decisions.** Defer to Developer for all code changes.
 - **Do NOT skip validation.** Always read skill files before executing them.

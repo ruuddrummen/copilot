@@ -1,9 +1,5 @@
 {
     "mcpServers": {
-        "io.github.github/github-mcp-server": {
-            "type": "http",
-            "url": "https://api.githubcopilot.com/mcp/"
-        },
         "io.github.upstash/context7": {
             "command": "npx",
             "args": [
