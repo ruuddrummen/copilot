@@ -33,7 +33,7 @@ Create a plan file using this format:
 - Any observations about parallelism, risks, or ordering rationale.
 
 ### Reports
-<!-- Developer appends planning-focused reports here after completing each task -->
+<!-- This is where implementers of the issues append their planning-focused reports after they complete each task -->
 ```
 
 ## Constraints
