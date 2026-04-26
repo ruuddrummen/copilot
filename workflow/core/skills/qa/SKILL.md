@@ -21,7 +21,7 @@ Do NOT over-interview. If the description is clear enough to file, move on.
 
 ### 2. Explore the codebase in the background
 
-While talking to the user, kick off an Agent (subagent_type=Explore) in the background to understand the relevant area. The goal is NOT to find a fix — it's to:
+While talking to the user, invoke an Explore Agent in the background to understand the relevant area. The goal is NOT to find a fix — it's to:
 
 - Learn the domain language used in that area (check UBIQUITOUS_LANGUAGE.md)
 - Understand what the feature is supposed to do
@@ -123,8 +123,8 @@ When creating a breakdown:
 - **Reproduction steps are mandatory** — if you can't determine them, ask the user
 - **Keep it concise** — a developer should be able to read the work item in 30 seconds
 
-After filing, print all work item URLs (with blocking relationships summarized) and ask: "Next issue, or are we done?"
+After filing, print the work item URLs (with blocking relationships summarized) in a brief chat message, then **invoke the Ask Questions tool** to ask whether there are more issues with options like "Report another issue" / "We're done" / <Free-text-field>.
 
 ### 5. Continue the session
 
-Keep going until the user says they're done. Each work item is independent — don't batch them.
+Keep going until the user says they're done via the Ask Questions tool. Each work item is independent — don't batch them. Never end a QA turn without invoking the Ask Questions tool.
