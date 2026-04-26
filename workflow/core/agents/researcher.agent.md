@@ -52,7 +52,8 @@ When you receive both a **root work item ID** and a **sub-work item ID** as inpu
 4. **Conduct research** using web, GitHub, and documentation tools. Cover all capability groups and scope defined in the work item.
 5. **Write the output Markdown file** to the path from step 3. The file must include a `## Sources` section at the end listing every source link used. Every claim must have a clickable hyperlink; missing info must be marked as `> ⚠️ Not publicly findable` or `> ❓ Open question`.
 6. **Update the ADO sub-work item** state to `Done` using `ado-remote-mcp/wit_update_work_item`.
-7. **Return exactly one status keyword** as your final message:
+7. **Optionally surface a proposed learning.** If you encountered a non-obvious pattern, pitfall, or reusable knowledge worth preserving, include a `### Proposed Learning` section (1–4 sentences) before the status keyword. Do **not** edit skill or instruction files yourself — the Orchestrator decides with the user whether to capture it. Most tasks will not warrant one.
+8. **Return exactly one status keyword** as your final message:
    - `SUCCESS` — research complete, file written, ADO updated.
    - `FAILED` — an unrecoverable error occurred. Describe the error before the keyword.
 
@@ -67,7 +68,7 @@ Do NOT ask the user questions in loop mode. Proceed autonomously.
 
 ## 2. Alignment
 
-- Use #tool:vscode/askQuestions to clarify ambiguous or underspecified requests before proceeding.
+- Use the Ask Questions tool to clarify ambiguous or underspecified requests before proceeding.
 - Confirm the scope and expected output format with the user when in doubt.
 
 ## 3. Execution
@@ -84,7 +85,7 @@ Do NOT ask the user questions in loop mode. Proceed autonomously.
 Present complex findings as a **DRAFT**. On user input:
 
 - Changes requested → revise and present an updated draft.
-- Questions asked → clarify using #tool:vscode/askQuestions
+- Questions asked → clarify using the Ask Questions tool
 - Approval given → acknowledge; user can proceed via handoff to the Backlog Manager if a work item is needed.
 
 </workflow>

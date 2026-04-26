@@ -106,15 +106,9 @@ After completing the task, consider whether you encountered friction, surprise, 
 - Patterns that made the task easier or harder than expected
 - Missing documentation or conventions
 
-If warranted, append an entry to `LEARNINGS.md`:
+If warranted, surface it in your response under a `### Proposed Learning` section (1–4 sentences). Do **not** edit skill or instruction files yourself — the Orchestrator decides with the user whether to capture it.
 
-```markdown
-## YYYY-MM-DD — Developer (#<work-item-ID>)
-
-<learning text>
-```
-
-Most tasks will NOT warrant a learning. Only write one when genuinely useful.
+Most tasks will NOT warrant a learning.
 
 ## Constraints
 
@@ -123,6 +117,7 @@ Most tasks will NOT warrant a learning. Only write one when genuinely useful.
 - **Do not review other agents' work** unless you encounter a blocking error in it.
 - **Commit atomically.** One commit per task, not per file.
 - **Stay in scope.** Do not refactor, add features, or "improve" code beyond what the task requires.
+- **Do not edit skill, instruction, or learnings files.** Surface proposed learnings in your response so the Orchestrator can capture them.
 
 ## Response Format
 
@@ -136,3 +131,4 @@ Additionally include:
 
 - What task you completed (title + work item ID).
 - Key decisions or trade-offs made.
+- Optionally, a `### Proposed Learning` section if step 9 surfaced one.

@@ -6,7 +6,7 @@ argument-hint: "Root work item ID (e.g. 123)"
 
 ## Prerequisites
 
-A work item ID **must** be provided. If missing, prompt the user for it using `#tool:vscode/askQuestions`.
+A work item ID **must** be provided. If missing, prompt the user for it using the Ask Questions tool.
 
 ## Flow
 
@@ -33,14 +33,14 @@ Repeat until all tasks are complete:
    - **`ALL_ISSUES_CLOSED`**: Exit the loop — all work is done.
    - **`FAILED`**: Enter the [Error Recovery](#error-recovery) flow.
    - **No recognized keyword**: Treat as a failure. Enter the [Error Recovery](#error-recovery) flow.
-5. After completing a full loop, evaluate whether an Orchestrator-level learning is warranted and append to `LEARNINGS.md` if so.
+5. **Surface proposed learnings.** If Developer's response includes a `### Proposed Learning`, or if a loop-level learning is warranted, follow the Orchestrator's `## Learnings` flow: read `update-skills`, recommend, consult the user, then capture only on approval.
 
 ### 4. Completion
 
 When all tasks are done (all checkboxes marked `[x]` or Developer returns `ALL_ISSUES_CLOSED`):
 
 1. Summarize what was accomplished.
-2. Use `#tool:vscode/askQuestions` to present follow-up options to the user.
+2. Use the Ask Questions tool to present follow-up options to the user.
 
 ---
 
@@ -60,7 +60,7 @@ When Developer fails (returns `FAILED`, no keyword, or an empty response):
 
 1. **First failure**: Invoke Developer again on the **same task** with this additional context:
    > "Previous attempt did not complete. There may be uncommitted changes from the previous attempt — inspect git status and decide whether to continue from the partial changes or start fresh."
-2. **Second failure on the same task**: **Stop.** Report the failure to the user using `#tool:vscode/askQuestions` with these options:
+2. **Second failure on the same task**: **Stop.** Report the failure to the user using the Ask Questions tool with these options:
    - **Skip this task** and continue with the next one in the plan.
    - **Abort** the loop entirely and discuss the problem.
    - **Retry once more** (user's discretion).

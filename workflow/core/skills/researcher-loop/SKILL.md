@@ -6,7 +6,7 @@ argument-hint: "Root work item ID (e.g. 123)"
 
 ## Prerequisites
 
-A work item ID **must** be provided. If missing, prompt the user for it using `#tool:vscode/askQuestions`.
+A work item ID **must** be provided. If missing, prompt the user for it using the Ask Questions tool.
 
 ## Flow
 
@@ -35,14 +35,14 @@ Repeat until all tasks are complete:
    - `git add .`
    - `git commit -m "research(<root-ID>): complete subtask(s) #<id1> [#<id2> ...]"` — list all IDs of tasks that returned `SUCCESS` in this group.
 6. After handling all responses (and retries), re-read the plan file and check whether all checkboxes are marked `[x]`. If so, exit the loop.
-7. After completing a full loop, evaluate whether an Orchestrator-level learning is warranted and append to `LEARNINGS.md` if so.
+7. **Surface proposed learnings.** If any Researcher response includes a `### Proposed Learning`, or if a loop-level learning is warranted, follow the Orchestrator's `## Learnings` flow: read `update-skills`, recommend, consult the user, then capture only on approval.
 
 ### 4. Completion
 
 When all tasks are done (all checkboxes marked `[x]`):
 
 1. Summarize what was researched and which output files were written.
-2. Use `#tool:vscode/askQuestions` to present follow-up options to the user.
+2. Use the Ask Questions tool to present follow-up options to the user.
 
 ---
 
@@ -63,7 +63,7 @@ When Researcher fails (returns `FAILED`, no keyword, or an empty response):
 
 1. **First failure**: Invoke Researcher again on the **same task** with this additional context:
    > "Previous attempt did not complete. Review the plan file and work item, then retry the research task."
-2. **Second failure on the same task**: **Stop.** Report the failure to the user using `#tool:vscode/askQuestions` with these options:
+2. **Second failure on the same task**: **Stop.** Report the failure to the user using the Ask Questions tool with these options:
    - **Skip this task** and continue with the next available group.
    - **Abort** the loop entirely and discuss the problem.
    - **Retry once more** (user's discretion).
