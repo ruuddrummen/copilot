@@ -71,33 +71,9 @@ If a plan file exists at `/memories/session/plan-<parent-ID>.md`:
   - Blockers discovered for other tasks.
   - Deviations from the planned approach that affect sibling tasks.
   - Warnings about shared resources or incomplete dependencies.
-- Do NOT include detailed implementation notes here — those go in session memory.
+- Keep these notes VERY concise and limited to critical information. Do NOT include detailed implementation notes here.
 
-### 8. Update Session Memory
-
-Update `/memories/session/issue-<ID>-notes.md` using this template:
-
-```markdown
-## Issue #<ID> — <Title>
-
-### Context
-
-<!-- What this task is about, key constraints from the issue -->
-
-### Approach
-
-<!-- What approach was taken and why -->
-
-### Key Files
-
-<!-- Files created or modified, with brief notes -->
-
-### Open Questions
-
-<!-- Anything unresolved that the next agent should be aware of -->
-```
-
-### 9. Evaluate Learnings
+### 8. Evaluate Learnings
 
 After completing the task, consider whether you encountered friction, surprise, or something that could improve future workflows:
 
@@ -131,4 +107,4 @@ Additionally include:
 
 - What task you completed (title + work item ID).
 - Key decisions or trade-offs made.
-- Optionally, a `### Proposed Learning` section if step 9 surfaced one.
+- Optionally, a `### Proposed Learning` section if step 8 surfaced one.
