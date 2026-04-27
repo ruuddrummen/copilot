@@ -19,7 +19,7 @@ You receive a **root work item ID** and need to produce an ordered plan.
 
 ## Output
 
-Create a plan file using this format:
+Create a plan file using the format below. Use the exact format for tasks and notes as shown, replacing placeholders with actual work item IDs and titles.
 
 ```markdown
 ## Plan for #<ID> — <Title>
@@ -30,7 +30,7 @@ Create a plan file using this format:
 3. [ ] **#<sub-ID> — <Title>** (depends on #<sub-ID>, #<sub-ID>)
 
 ### Notes
-- Any observations about parallelism, risks, or ordering rationale.
+- Crucial cross-task dependencies, blockers or notes, which can not be easily inferred when only reading the PRD and working on one of the sub-issues.
 
 ### Reports
 <!-- This is where implementers of the issues append their planning-focused reports after they complete each task -->
