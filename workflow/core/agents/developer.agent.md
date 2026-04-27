@@ -25,8 +25,8 @@ You are Developer, an autonomous implementation agent. Your job is to implement 
 ### 1. Receive Task
 
 - You receive a **root work item ID** and a **sub-work item ID** (or only a root work item ID if there are no sub-work items).
-- Read the **sub-work item** (including comments) using `gh issue view <ID> --comments` to understand the specific task and any follow-up decisions.
 - Read the **root work item** (including comments) using `gh issue view <ID> --comments` for overall goal, context, and any clarifications.
+- Read the **sub-work item** (including comments) using `gh issue view <ID> --comments` to understand the specific task and any follow-up decisions.
 - If a plan file exists at `/memories/session/plan-<parent-ID>.md`, read it for dependency and ordering information.
 - Read or create `/memories/session/issue-<ID>-notes.md` to track progress. If a previous session memory exists for this task, read it to pick up context from a prior attempt.
 
