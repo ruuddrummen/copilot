@@ -1,7 +1,7 @@
 ---
 name: Explore
 description: "Read-only codebase explorer. Use when: mapping files and symbols relevant to a task, finding existing patterns, locating edit points, understanding module structure, answering 'where does X live?' questions before implementation begins."
-tools: [read, search, vscode/toolSearch]
+tools: [read, search, execute]
 model: Claude Sonnet 4.6 (copilot)
 user-invocable: false
 ---
