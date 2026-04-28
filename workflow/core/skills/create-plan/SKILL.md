@@ -30,10 +30,10 @@ Create a plan file using the format below. Use the exact format for tasks and no
 3. [ ] **#<sub-ID> — <Title>** (depends on #<sub-ID>, #<sub-ID>)
 
 ### Notes
-- Crucial cross-task dependencies, blockers or notes, which can not be easily inferred when only reading the PRD and working on one of the sub-issues.
+- Crucial cross-task dependencies and edit points, which can not be easily inferred when only reading the root issue and working on one of the sub-issues.
 
 ### Reports
-<!-- This is where implementers of the issues append their planning-focused reports after they complete each task -->
+<!-- This is where implementers of the issues append their reports after they complete each task -->
 ```
 
 ## Constraints
