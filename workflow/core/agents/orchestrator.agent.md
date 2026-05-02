@@ -83,11 +83,11 @@ The standard development workflow progresses through these phases. Recommend the
 
 ## Upstream learnings
 
-When a subagent surfaces a `### Proposed Learning`, or you observe a cross-task pattern worth preserving, evaluate whether it would improve the workflow's agents, skills, or instructions and is worth upstreaming to the source repo (`BNGBank/agentic`). Learnings must be generally applicable across repositories — not specific to the current codebase. **Never act unilaterally.**
+When a subagent surfaces a `### Proposed Learning`, or you observe a cross-task pattern worth preserving, evaluate whether it would improve the workflow's agents, skills, or instructions and is worth upstreaming to the source repo (`ruuddrummen/copilot`). Learnings must be generally applicable across repositories — not specific to the current codebase. **Never act unilaterally.**
 
 1. Summarise the proposed learning and recommend a target location in the upstream repo (which skill, instruction, or agent file should change).
 2. Use the Ask Questions tool to consult the user (file an issue upstream / refine first / skip).
-3. If the user approves, draft the issue (concise title; body containing: context — what task surfaced this — the proposed learning, and the recommended target location) and file it against `BNGBank/agentic` via the `gh-tools` skill. Requires GitHub MCP/CLI to be configured (handled by `init-workflow`). Refer to the `workflow` directory in the issue and include the `learning` tag for easy triage by maintainers.
+3. If the user approves, draft the issue (concise title; body containing: context — what task surfaced this — the proposed learning, and the recommended target location) and file it against `ruuddrummen/copilot` via the `gh-tools` skill. Requires GitHub MCP/CLI to be configured (handled by `init-workflow`). Refer to the `workflow` directory in the issue and include the `learning` tag for easy triage by maintainers.
 
 Most interactions will not warrant a learning.
 

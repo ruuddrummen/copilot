@@ -35,15 +35,15 @@ irm https://aka.ms/apm-windows | iex
 
 ```shell
 # Core workflow (required)
-apm install BNGBank/agentic/workflow/core
+apm install ruuddrummen/copilot/workflow/core
 
 # Azure DevOps integration (optional)
-apm install BNGBank/agentic/workflow/ado
+apm install ruuddrummen/copilot/workflow/ado
 ```
 
 > You can update the modules at any time by running `apm deps update`. Add `-g` to update global installations.
 
-> Add `-g` to install globally for all repositories (e.g. `apm install -g BNGBank/agentic/workflow/core`). Global installs do not include prompts and MCP servers — those remain repo-scoped.
+> Add `-g` to install globally for all repositories (e.g. `apm install -g ruuddrummen/copilot/workflow/core`). Global installs do not include prompts and MCP servers — those remain repo-scoped.
 
 ### 3. Run `init-workflow`
 

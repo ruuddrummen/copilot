@@ -74,20 +74,16 @@ Only proceed if the `workflow/ado` module is installed.
 
 **Constants — do not prompt the user for these:**
 
-- **Project name** is hard-coded to `BNGBank` for this organisation. Substitute it directly into the template wherever `{project}` appears. Do not ask the user.
-
 **If the file does not exist**, interview the user for the remaining values:
 
 - Team name
-- Area paths (at least one) - default: `BNGBank\Team <team-name>`
-- Default iteration path - default: `BNGBank\Team <team-name>`
+- Area paths (at least one) - default: `{project}\{team_name}`
+- Default iteration path - default: `{project}\{team_name}`
 - Key epics (optional — can be added later)
 - Key features (optional — can be added later)
 - Stakeholders (at least the team itself)
 
-The repository name and ID are derived from the git remote URL already obtained in step 2 — do not ask the user:
-
-- If the remote is an ADO URL (contains `dev.azure.com` or `visualstudio.com`), extract the repository name from the URL path and resolve the repository ID by calling the Azure DevOps `get_repo_by_name_or_id` tool (pass `BNGBank` as the project name). Populate the `ADO Repository ID: {repo_id}` line in `AGENTS.md` under `## Platform Context`.
+- If the remote is an ADO URL (contains `dev.azure.com` or `visualstudio.com`), extract the repository name from the URL path and resolve the repository ID by calling the Azure DevOps `get_repo_by_name_or_id` tool. Populate the `ADO Repository ID: {repo_id}` line in `AGENTS.md` under `## Platform Context`.
 - If the remote is not an ADO URL (e.g., GitHub), omit the `ADO Repository ID` line from `AGENTS.md` entirely.
 
 Then create `AZURE_DEVOPS.md` using the template in [references/azure-devops.md](references/azure-devops.md), substituting the `{placeholder}` values with the user's answers.

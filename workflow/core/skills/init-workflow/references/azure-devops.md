@@ -4,18 +4,18 @@ This file contains all team-specific configuration for the backlog manager agent
 
 ## Project
 
-- **Project:** `BNGBank`
+- **Project:** `{project}`
 - **Team name:** `{team_name}`
 
 ## Area Paths
 
 | Area Path | Description |
 |---|---|
-| `BNGBank\{team_name}` | Team-managed features |
+| `{project}\{team_name}` | Team-managed features |
 
 ## Default Iteration
 
-`BNGBank\{team_name}` (unless a specific sprint is required)
+`{project}\{team_name}` (unless a specific sprint is required)
 
 ## Key Epics
 
