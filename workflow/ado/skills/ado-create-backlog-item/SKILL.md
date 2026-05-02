@@ -10,7 +10,7 @@ This skill guides the creation of Features and Backlog Items in Azure DevOps.
 
 ## Project Configuration
 
-Read `AZURE_DEVOPS.md` for all team-specific configuration: project, team name, repository, area paths, default iteration, key epics, and stakeholders.
+Read `AZURE_DEVOPS.md` for all organization, team and project-specific configuration: project name, team name, repository name and ID, area paths, default iteration, key epics, stakeholders and backlog item templates.
 
 ## Work Item Hierarchy
 
@@ -18,8 +18,6 @@ Read `AZURE_DEVOPS.md` for all team-specific configuration: project, team name, 
 - Features MUST be linked to existing Epics
 - Backlog Items MUST be linked to existing Features
 - Bugs do NOT require a parent item
-
-> **Epics cannot be created by the agent** — the user does not have permission to create Epics in Azure DevOps. When asked to write an Epic, suggest the title, description, and other relevant fields in the conversation instead of creating it.
 
 ## Creation Process
 
@@ -44,10 +42,6 @@ Immediately after creation, use the Azure DevOps **work item linking** tool to e
 ### Step 3: Verify
 
 Always verify the relationship was established using the Azure DevOps **work item retrieval** tool with expanded relations
-
-## Templates
-
-Templates are specified in `AZURE_DEVOPS.md`. Always use the appropriate template for the work item type being created.
 
 ### Step 4: Report
 
