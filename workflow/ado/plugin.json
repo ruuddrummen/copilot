@@ -1,0 +1,15 @@
+{
+  "name": "workflow-ado",
+  "version": "1.0.0",
+  "description": "Azure DevOps integration for the agentic workflow — backlog item creation, ADO MCP tool reference, and work item revert.",
+  "author": { "name": "BNGBank" },
+  "repository": "https://github.com/BNGBank/agentic",
+  "keywords": [
+    "workflow",
+    "azure-devops",
+    "ado",
+    "backlog",
+    "skills"
+  ],
+  "skills": ["./skills"]
+}
