@@ -1,6 +1,6 @@
 ---
 name: gh-tools
-description: "GitHub issue, sub-issue, comment, and code/issue/repo search operations via the GitHub MCP server (preferred when loaded) or the `gh` CLI."
+description: "GitHub operations via MCP (preferred) or `gh` CLI. Use when: creating, reading, updating, or closing issues or sub-issues; commenting on issues; applying or removing labels; searching code, issues, or repos; filing work items or bug reports; linking sub-issues to a parent issue."
 ---
 
 # GitHub tools

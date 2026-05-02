@@ -4,6 +4,7 @@ description: "Reads work items and produces an ordered implementation plan with 
 tools:
   [
     read,
+    execute,
     vscode/memory,
     vscode/toolSearch,
     ado-remote-mcp/wit_get_work_item,
