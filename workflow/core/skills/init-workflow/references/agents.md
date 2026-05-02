@@ -5,6 +5,7 @@
 This repository uses {platform} for work item tracking and code reviews.
 
 Remote URL: {remote_url}
+ADO Repository ID: {repo_id}
 
 ## Terminology
 
@@ -16,12 +17,9 @@ Remote URL: {remote_url}
 | Work item reference | #<ID>                | #<ID>             |
 | Code review         | Pull Request         | Pull Request      |
 
-## Platform-specific Skills (ADO)
+## Platform Skills
 
-When performing these operations, prefer the following skills if available:
-
-- Creating work items → use `create-backlog-item` skill
-- Reverting / restoring a work item to a previous version → use `revert-work-item` skill
+This repo uses {platform}. Prefer skills prefixed with the platform name in use — `ado-*` for Azure DevOps, `gh-*` for GitHub. Agents should pick the right skill by description matching; do not invoke platform CLIs or MCP tools directly.
 
 Always read `AZURE_DEVOPS.md` for context before using Azure DevOps tools.
 

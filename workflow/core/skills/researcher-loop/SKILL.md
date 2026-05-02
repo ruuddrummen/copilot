@@ -35,7 +35,7 @@ Repeat until all tasks are complete:
    - `git add .`
    - `git commit -m "research(<root-ID>): complete subtask(s) #<id1> [#<id2> ...]"` — list all IDs of tasks that returned `SUCCESS` in this group.
 6. After handling all responses (and retries), re-read the plan file and check whether all checkboxes are marked `[x]`. If so, exit the loop.
-7. **Surface proposed learnings.** If any Researcher response includes a `### Proposed Learning`, or if a loop-level learning is warranted, follow the Orchestrator's `## Learnings` flow: read `update-skills`, recommend, consult the user, then capture only on approval.
+7. **Surface proposed learnings.** If any Researcher response includes a `### Proposed Learning`, or if a loop-level pattern emerges that could improve the workflow's agents, skills, or instructions, follow the Orchestrator's `## Upstream learnings` flow: summarise, recommend, consult the user, file an upstream issue only on approval. Only surface learnings that are generally applicable — not specific to the current codebase.
 
 ### 4. Completion
 

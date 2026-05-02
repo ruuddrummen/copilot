@@ -73,4 +73,4 @@ After comparing, give your own recommendation: which design you think is stronge
 
 ### 7. Create work item
 
-Create a refactor RFC as a work item using `gh issue create -t "RFC: <title>" -b "<body>"`. Use the template in [REFERENCE.md](REFERENCE.md). Do NOT ask the user to review before creating — just create it and share the URL.
+Create a refactor RFC as a work item. Use the template in [REFERENCE.md](REFERENCE.md). Prefix the title with `RFC:` and include tag `refactor`. Do NOT ask the user to review before creating — just create it and share the URL.

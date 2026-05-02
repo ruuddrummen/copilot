@@ -16,4 +16,4 @@ A deep module (as opposed to a shallow module) is one which encapsulates a lot o
 
 Check with the user that these modules match their expectations. Check with the user which modules they want tests written for.
 
-3. Write the PRD using the appropriate platform template from the `templates/` directory. Then submit the PRD as a work item using `gh issue create -t "PRD: <title>" -b "<body>"`.
+3. Write the PRD using the appropriate platform template from the `templates/` directory. Then submit the PRD as a work item. Prefix the title with `PRD:` and include tag `prd`.

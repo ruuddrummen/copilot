@@ -2,13 +2,15 @@
 
 A multi-agent development workflow that takes you from idea to shipped code. An **Orchestrator** coordinates the conversation while specialised agents handle planning, implementation, research, and exploration autonomously.
 
+Some skills are heavily inspired by https://github.com/mattpocock/skills.
+
 ## What's included
 
 The workflow ships as two independently installable **capability modules**:
 
 | Module | Path | Description |
-|--------|------|-------------|
-| **core** | `workflow/core` | Orchestrator, Developer, Planner, Explore, and Researcher agents plus all workflow skills (refine, to-prd, to-issues, developer-loop, researcher-loop, QA, architecture improvement) |
+| --- | --- | --- |
+| **core** | `workflow/core` | Orchestrator, Developer, Planner, Explore, and Researcher agents plus all workflow skills (init-workflow, refine, to-prd, to-issues, developer-loop, researcher-loop, QA, architecture improvement, gh-tools) |
 | **ado** | `workflow/ado` | Azure DevOps integration — backlog item creation, ADO MCP tool reference, and templates |
 
 Install **core** for the base workflow. Add **ado** when your team tracks work in Azure DevOps.
@@ -29,9 +31,7 @@ curl -sSL https://aka.ms/apm-unix | sh
 irm https://aka.ms/apm-windows | iex
 ```
 
-### 2. Install the modules
-
-#### Option A — Install locally (per-repo)
+### 2. Install the workflow modules
 
 ```shell
 # Core workflow (required)
@@ -41,38 +41,63 @@ apm install BNGBank/agentic/workflow/core
 apm install BNGBank/agentic/workflow/ado
 ```
 
-#### Option B — Install globally (available in every repo)
+> You can update the modules at any time by running `apm deps update`. Add `-g` to update global installations.
 
-> Note you may have to install the MCP servers manually if you use global installation. See the `.mcp.json` files in `workflow/core/` and `workflow/ado/` for the server declarations to add to your global MCP config.
+> Add `-g` to install globally for all repositories (e.g. `apm install -g BNGBank/agentic/workflow/core`). Global installs do not include prompts and MCP servers — those remain repo-scoped.
 
-```shell
-# Core workflow (required)
-apm install BNGBank/agentic/workflow/core -g
+### 3. Run `init-workflow`
 
-# Azure DevOps integration (optional)
-apm install BNGBank/agentic/workflow/ado -g
+> After installing the modules, run the `/init-workflow` skill. It interviews you for team-specific values, scaffolds `AGENTS.md` and (for ADO teams) `AZURE_DEVOPS.md`, and offers to install the GitHub MCP server and/or `gh` CLI in your workspace and devcontainer.
+>
+> On subsequent runs (e.g., after a package upgrade) it merges in any new template sections without overwriting existing content.
+
+<details>
+<summary>Manual GitHub MCP / CLI setup</summary>
+
+If `init-workflow` cannot manage your environment (e.g. no devcontainer, restricted shell), you can install GitHub access manually.
+
+GitHub users may use either the **GitHub MCP server** (`io.github.github/github-mcp-server`, added by the consumer to `.vscode/mcp.json`) or the `gh` **CLI** for GitHub operations — at least one is required. ADO-only teams can skip this step entirely.
+
+#### Windows
+
+```powershell
+winget install --id GitHub.cli
 ```
 
-### 3. MCP servers
+#### Linux / devcontainer
+
+Add the GitHub CLI as a [devcontainer feature](https://containers.dev/features) in your `devcontainer.json`:
+
+```jsonc
+{
+  "features": {
+    "ghcr.io/devcontainers/features/github-cli:1": {},
+  },
+}
+```
+
+This works on any base image. For non-devcontainer Linux environments, see [CLI install instructions](https://github.com/cli/cli/blob/trunk/docs/install_linux.md).
+
+After installation, authenticate with `gh auth login`.
+
+</details>
+
+<details>
+<summary>Manual MCP server configuration</summary>
 
 Each module ships a `.mcp.json` declaring the MCP servers it needs. APM handles installation. If your environment requires manual setup, see the `.mcp.json` files in `workflow/core/` and `workflow/ado/` for the server declarations to add to your `.vscode/mcp.json`.
 
-| Module | Servers |
-|--------|--------|
-| **core** | GitHub MCP, Context7, Microsoft Learn |
-| **ado** | Azure DevOps MCP |
+| Module   | Servers                   |
+| -------- | ------------------------- |
+| **core** | Context7, Microsoft Learn |
+| **ado**  | Azure DevOps MCP          |
 
-### 4. Configure your repository
+> **Note:** `core` does **not** bundle the GitHub MCP server — it would force-load on ADO-only consumers. GitHub users who want MCP transport must add `io.github.github/github-mcp-server` to their own `.vscode/mcp.json`. Otherwise the `gh-tools` skill falls back to the `gh` CLI.
 
-Run the **/init-workflow** skill to set up the required configuration files. It auto-detects your git remote and platform, interviews you for team-specific values, and scaffolds the files automatically:
-
-- `AGENTS.md` (or appends to `.github/copilot-instructions.md` if it exists) — platform context, terminology, agent interaction rules
-- `AZURE_DEVOPS.md` (ADO teams only) — project, team, area paths, iterations, epics, features, stakeholders
-
-On subsequent runs (e.g., after a package upgrade), the **/init-workflow** skill merges in any new template sections without overwriting your existing content.
+</details>
 
 <details>
-<summary>Manual setup</summary>
+<summary>Manual AGENTS.md / AZURE_DEVOPS.md setup</summary>
 
 #### AGENTS.md
 
@@ -85,7 +110,7 @@ Every repo using the workflow needs an `AGENTS.md` at the root (or equivalent co
 
 This repository uses Azure DevOps for work item tracking and code reviews.
 
-Remote URL: https://dev.azure.com/<org>/<project>/_git/<repo>
+Remote URL: https://dev.azure.com/<org>/<project>/\_git/<repo>
 
 ## Terminology
 
@@ -97,11 +122,12 @@ Remote URL: https://dev.azure.com/<org>/<project>/_git/<repo>
 | Work item reference | #<ID>                | #<ID>             |
 | Code review         | Pull Request         | Pull Request      |
 
-## Platform-specific Skills (ADO)
+## Platform Skills
 
-When performing these operations, prefer the following skills if available:
+Prefer skills prefixed with the platform name in use:
 
-- Creating work items → use `create-backlog-item` skill
+- **ADO** — `ado-create-backlog-item` (create work items), `ado-revert-work-item` (restore previous version), `ado-tools` (general MCP tool reference).
+- **GitHub** — `gh-tools` (issues, sub-issues, comments, search; prefers MCP, falls back to gh CLI).
 
 Always read `AZURE_DEVOPS.md` for context before using Azure DevOps tools.
 
@@ -132,8 +158,8 @@ If you installed the **ado** module, create an `AZURE_DEVOPS.md` at the repo roo
 
 ## Area Paths
 
-| Area Path | Description |
-|---|---|
+| Area Path               | Description           |
+| ----------------------- | --------------------- |
 | `YourProject\Your Team` | Team-managed features |
 
 ## Default Iteration
@@ -142,21 +168,21 @@ If you installed the **ado** module, create an `AZURE_DEVOPS.md` at the repo roo
 
 ## Key Epics
 
-| Epic | ID | Description |
-|---|---|---|
+| Epic    | ID    | Description             |
+| ------- | ----- | ----------------------- |
 | My Epic | 12345 | Description of the epic |
 
 ## Key Features
 
-| Feature | ID | Description |
-|---|---|---|
+| Feature    | ID    | Description                |
+| ---------- | ----- | -------------------------- |
 | My Feature | 67890 | Description of the feature |
 
 ## Stakeholders
 
-| Stakeholder | Description |
-|---|---|
-| Your Team | Description of your team |
+| Stakeholder | Description              |
+| ----------- | ------------------------ |
+| Your Team   | Description of your team |
 ```
 
 </details>
@@ -164,7 +190,7 @@ If you installed the **ado** module, create an `AZURE_DEVOPS.md` at the repo roo
 ## Agents
 
 | Agent | Role |
-|-------|------|
+| --- | --- |
 | **Orchestrator** | Primary coordinator — guides the workflow, interviews the user, delegates to other agents |
 | **Developer** | Autonomous implementation — picks up a task, writes code, validates, commits |
 | **Planner** | Reads work items and produces an ordered plan with dependencies |
@@ -194,7 +220,7 @@ Start by opening the **dev** prompt (or **dev-max** / **dev-sonnet** for model v
 ### Core skills (`workflow/core`)
 
 | Skill | Description |
-|-------|-------------|
+| --- | --- |
 | **refine** | Relentless interview to reach shared understanding on an idea or design |
 | **to-prd** | Synthesize a PRD from conversation context and submit as a work item |
 | **to-issues** | Break a PRD into independently-grabbable vertical-slice work items |
@@ -203,23 +229,25 @@ Start by opening the **dev** prompt (or **dev-max** / **dev-sonnet** for model v
 | **researcher-loop** | Run Researcher in a loop to complete all research subtasks |
 | **qa** | Interactive QA session — user reports bugs, agent files work items |
 | **improve-codebase-architecture** | Explore for architectural friction and propose module-deepening refactors |
-| **init** | Initialize or update `AGENTS.md` and `AZURE_DEVOPS.md` configuration files |
+| **init-workflow** | Initialize or update `AGENTS.md` and `AZURE_DEVOPS.md`, and optionally wire up the GitHub MCP server / `gh` CLI in your workspace and devcontainer |
+| **gh-tools** | Lean GitHub operations (issues, sub-issues, view, list, search) — ships with **core** for general GH use, prefers MCP and falls back to `gh` CLI |
 
 ### ADO skills (`workflow/ado`)
 
 | Skill | Description |
-|-------|-------------|
-| **create-backlog-item** | Create Features, PBIs, and Bugs in Azure DevOps with templates and parent linking |
-| **azure-devops-tools** | Fallback reference for all ADO MCP tool schemas (used only when dedicated skills are insufficient) |
+| --- | --- |
+| **ado-create-backlog-item** | Create Features, PBIs, and Bugs in Azure DevOps with templates and parent linking |
+| **ado-revert-work-item** | Restore an Azure DevOps work item to a previous revision from its history |
+| **ado-tools** | Fallback reference for all ADO MCP tool schemas (used only when dedicated skills are insufficient) |
 
 ## Prompts
 
 Three prompt entry points are provided, differing only in model selection:
 
-| Prompt | Use when |
-|--------|----------|
-| **dev** | Default — best balance of capability and speed |
-| **dev-max** | Maximum capability for complex tasks |
-| **dev-sonnet** | Faster, lighter tasks |
+| Prompt         | Use when                                       |
+| -------------- | ---------------------------------------------- |
+| **dev**        | Default — best balance of capability and speed |
+| **dev-max**    | Maximum capability for complex tasks           |
+| **dev-sonnet** | Faster, lighter tasks                          |
 
 All three launch the Orchestrator agent.

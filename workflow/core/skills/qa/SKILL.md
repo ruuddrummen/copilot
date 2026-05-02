@@ -23,7 +23,7 @@ Do NOT over-interview. If the description is clear enough to file, move on.
 
 While talking to the user, invoke an Explore Agent in the background to understand the relevant area. The goal is NOT to find a fix — it's to:
 
-- Learn the domain language used in that area (check UBIQUITOUS_LANGUAGE.md)
+- Learn the domain language used in that area (check UBIQUITOUS_LANGUAGE.md if it exists)
 - Understand what the feature is supposed to do
 - Identify the user-facing behavior boundary
 
@@ -46,7 +46,7 @@ Keep as a single work item when:
 
 ### 4. File the work item(s)
 
-Create work items using `gh issue create -t "Title" -b "Body"` (as standalone work items, or as sub-work items when a parent work item exists — see the `to-issues` skill for sub-issue attachment commands). Do NOT ask the user to review first — just file and share URLs.
+Create work items (as standalone work items, or as sub-work items when a parent work item exists). Do NOT ask the user to review first — just file and share URLs.
 
 Work items must be **durable** — they should still make sense after major refactors. Write from the user's perspective.
 

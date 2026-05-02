@@ -5,8 +5,6 @@ tools:
   [
     vscode/memory,
     vscode/toolSearch,
-    read,
-    execute,
     ado-remote-mcp/wit_get_work_item,
     ado-remote-mcp/wit_get_work_items_batch_by_ids,
     ado-remote-mcp/wit_list_work_item_comments,

@@ -33,7 +33,7 @@ Repeat until all tasks are complete:
    - **`ALL_ISSUES_CLOSED`**: Exit the loop — all work is done.
    - **`FAILED`**: Enter the [Error Recovery](#error-recovery) flow.
    - **No recognized keyword**: Treat as a failure. Enter the [Error Recovery](#error-recovery) flow.
-5. **Surface proposed learnings.** If Developer's response includes a `### Proposed Learning`, or if a loop-level learning is warranted, follow the Orchestrator's `## Learnings` flow: read `update-skills`, recommend, consult the user, then capture only on approval.
+5. **Surface proposed learnings.** If Developer's response includes a `### Proposed Learning`, or if a loop-level pattern emerges that could improve the workflow's agents, skills, or instructions, follow the Orchestrator's `## Upstream learnings` flow: summarise, recommend, consult the user, file an upstream issue only on approval. Only surface learnings that are generally applicable — not specific to the current codebase.
 
 ### 4. Completion
 

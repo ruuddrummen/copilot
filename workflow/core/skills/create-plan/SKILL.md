@@ -31,7 +31,6 @@ Create a plan file using the format below. Use the exact format for tasks and no
 
 ### Notes
 - Crucial cross-task dependencies and edit points, which can not be easily inferred when only reading the root issue and working on one of the sub-issues.
-
 ### Reports
 <!-- This is where implementers of the issues append their reports after they complete each task -->
 ```

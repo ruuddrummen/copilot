@@ -54,21 +54,6 @@ For each approved slice, create a sub-work item (when a parent work item exists)
 
 Create work items in dependency order (blockers first) so you can reference real work item IDs in the "Blocked by" field.
 
-Use the `execute` tool with `gh` CLI commands:
-
-```bash
-# Create a standalone issue
-gh issue create -t "Title" -b "Body" --repo owner/repo
-
-# Create a sub-issue (two steps — must be done sequentially):
-# Step 1: Create the issue
-new_id=$(gh issue create -t "Title" -b "Body" --repo owner/repo --json number --jq .number)
-# Step 2: Attach as sub-issue
-gh api repos/owner/repo/issues/{parent_id}/sub_issues --method POST -F sub_issue_id=$new_id
-```
-
-> **Important**: Always attach sub-issues **sequentially** (one at a time), never in parallel — parallel attachment can cause `422: Priority has already been taken` errors.
-
 <work-item-template>
 ## Parent
 

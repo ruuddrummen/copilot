@@ -4,7 +4,7 @@ description: "Interview the user relentlessly about an idea, plan or design unti
 argument-hint: "The idea, plan, or design to refine"
 ---
 
-Interview me relentlessly about every aspect of this plan until we reach a shared understanding. Walk down each branch of the design tree, resolving dependencies between decisions one-by-one. For each question, use the the Ask Questions tool tool and include your recommended answers.
+Interview me relentlessly about every aspect of this plan until we reach a shared understanding. Walk down each branch of the design tree, resolving dependencies between decisions one-by-one. For each question, use the Ask Questions tool and include your recommended answers.
 
 - If a question can be answered by exploring the codebase, explore the codebase instead.
 - If a question can be answered by exploring online resources, use appropriate research skills, sub-agents and tools to gather the necessary information instead.
@@ -13,7 +13,7 @@ Ask one question at a time, and provide appropriate context BEFORE each question
 
 ---
 
-When you are absolutely sure we have reached a shared understanding, confirm with me and ask what the next step is. Use the the Ask Questions tool tool to present the options:
+When you are absolutely sure we have reached a shared understanding, confirm with me and ask what the next step is. Use the Ask Questions tool to present the options:
 
 - "Start implementation" — you will proceed to implement the plan as is, without further questioning
 - "Something else" — Let me provide further instructions in free text
