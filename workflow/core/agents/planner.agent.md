@@ -3,6 +3,7 @@ name: Planner
 description: "Reads work items and produces an ordered implementation plan with dependencies. One-shot, stateless."
 tools:
   [
+    read,
     vscode/memory,
     vscode/toolSearch,
     ado-remote-mcp/wit_get_work_item,

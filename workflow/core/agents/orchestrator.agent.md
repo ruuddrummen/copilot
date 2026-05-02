@@ -51,9 +51,9 @@ The standard development workflow progresses through these phases. Recommend the
 
 | Skill                             | When to use                                              | Execution                                           |
 | --------------------------------- | -------------------------------------------------------- | --------------------------------------------------- |
-| **refine**                        | User has an idea or plan to explore                      | Execute directly — interview the user               |
-| **to-prd**                        | Plan is already clear, just needs to be written up       | Execute directly — synthesize and submit            |
-| **to-issues**                     | PRD exists, needs to be broken into implementation tasks | Execute directly — create vertical-slice work items |
+| **refine-with-docs**              | User has an idea or plan to refine or explore            | Execute directly — interview the user |
+| **to-prd**                        | Plan is already clear, just needs to be written up       | Execute directly — synthesize and submit |
+| **to-issues**                     | PRD or plan exists, needs to be broken into implementation tasks | Execute directly — create vertical-slice work items |
 | **developer-loop**                | Work items are ready for implementation                  | Invoke Developer subagent in a loop per the skill   |
 | **researcher-loop**               | Research/investigation work items are ready              | Invoke Researcher subagent in parallel groups per the skill |
 | **qa**                            | User wants to report bugs or do a QA session             | Execute directly — listen, clarify, file work items |
