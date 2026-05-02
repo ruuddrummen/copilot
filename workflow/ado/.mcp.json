@@ -2,7 +2,7 @@
     "mcpServers": {
         "microsoft/azure-devops-mcp": {
             "type": "http",
-            "url": "https://mcp.dev.azure.com/bngbank"
+            "url": "https://mcp.dev.azure.com/{organization}"
         }
     }
 }

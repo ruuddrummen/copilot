@@ -29,6 +29,15 @@ This file contains all team-specific configuration for the backlog manager agent
 |---|---|---|
 | N/A | N/A | No features defined yet. Create features for significant deliverables or components. |
 
+## Templates
+
+| Work Item Type | Template Path | Description |
+|---|---|---|
+| Epic | `{epic_template_path}` | Template for creating Epics |
+| Feature | `{feature_template_path}` | Template for creating Features |
+| Product Backlog Item | `{pbi_template_path}` | Template for creating Product Backlog Items |
+| Bug | `{bug_template_path}` | Template for creating Bugs |
+
 ## Stakeholders
 
 | Stakeholder | Description |

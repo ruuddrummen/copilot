@@ -18,7 +18,6 @@ Read `AZURE_DEVOPS.md` for all team-specific configuration: project, team name, 
 - Features MUST be linked to existing Epics
 - Backlog Items MUST be linked to existing Features
 - Bugs do NOT require a parent item
-- ALL work items use Dutch templates
 
 > **Epics cannot be created by the agent** — the user does not have permission to create Epics in Azure DevOps. When asked to write an Epic, suggest the title, description, and other relevant fields in the conversation instead of creating it.
 
@@ -48,7 +47,7 @@ Always verify the relationship was established using the Azure DevOps **work ite
 
 ## Templates
 
-Templates can be found in the [templates](./templates) directory. Always use the appropriate template for the work item type being created.
+Templates are specified in `AZURE_DEVOPS.md`. Always use the appropriate template for the work item type being created.
 
 ### Step 4: Report
 
@@ -96,14 +95,14 @@ Focus on functional outcomes — what should be true for the user/team, not how 
 ### For Features
 
 - ✅ Linked to existing Epic
-- ✅ Dutch template fully populated
+- ✅ Template fully populated
 - ✅ Clear stakeholders and dependencies identified
 - ✅ High-level outcome-focussed acceptance criteria defined (3-5 business-focused outcomes)
 
 ### For Backlog Items
 
 - ✅ Linked to existing Feature (unless user specifies otherwise)
-- ✅ Dutch template fully populated with all 7 sections
+- ✅ Template fully populated
 - ✅ Functional outcome-focussed acceptance criteria defined (5-7 criteria)
 - ✅ Solution realization describes the direction, not implementation specifics
 - ✅ Comprehensive test plan
