@@ -1,27 +1,18 @@
 # AGENTS.md
 
-## Platform Context
-
-This repository uses {platform} for work item tracking and code reviews.
-
-Remote URL: {remote_url}
-ADO Repository ID: {repo_id}
-
-## Terminology
-
-| Abstract Term       | Azure DevOps         | GitHub            |
-| ------------------- | -------------------- | ----------------- |
-| Work item           | Product Backlog Item | Issue             |
-| Sub-work item       | Task                 | Sub-issue         |
-| Bug                 | Bug                  | Issue (bug label) |
-| Work item reference | #<ID>                | #<ID>             |
-| Code review         | Pull Request         | Pull Request      |
-
 ## Platform Skills
 
-This repo uses {platform}. Prefer skills prefixed with the platform name in use — `ado-*` for Azure DevOps, `gh-*` for GitHub. Agents should pick the right skill by description matching; do not invoke platform CLIs or MCP tools directly.
+<!--
+Platform Skills tell core agents which skills to invoke for work-item and code-review operations against your tracker (GitHub, Azure DevOps, Jira, Linear, custom, or none).
 
-Always read `AZURE_DEVOPS.md` for context before using Azure DevOps tools.
+If you installed a first-party platform module (`workflow/gh`, `workflow/ado`), its `*-init` skill populates this section automatically.
+
+Otherwise, list the skills you want agents to use here, with one line each:
+
+- **`<skill-name>`** — short description of what the skill does and when to use it.
+
+If you have no platform skills, replace this comment with a brief description of how agents should interact with your tracker — for example, "Use the `gh` CLI directly for issue operations" or "There is no work-item tracker; ask the user to file work items manually."
+-->
 
 ## Agent Interaction
 

@@ -1,7 +1,7 @@
 {
   "name": "workflow-core",
   "version": "1.0.0",
-  "description": "Orchestrator, Developer, Planner, Explore, and Researcher agents plus all workflow skills.",
+  "description": "Orchestrator, Developer, Planner, Explore, and Researcher agents plus the platform-agnostic workflow skills.",
   "author": { "name": "Ruud Drummen" },
   "repository": "https://github.com/ruuddrummen/copilot",
   "keywords": [
@@ -9,8 +9,7 @@
     "orchestration",
     "agents",
     "skills",
-    "developer-loop",
-    "github"
+    "developer-loop"
   ],
   "agents": ["./agents"],
   "skills": ["./skills"],

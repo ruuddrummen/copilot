@@ -6,14 +6,15 @@ Some skills are heavily inspired by https://github.com/mattpocock/skills.
 
 ## What's included
 
-The workflow ships as two independently installable **capability modules**:
+The workflow ships as three independently installable **capability modules**:
 
 | Module | Path | Description |
 | --- | --- | --- |
-| **core** | `workflow/core` | Orchestrator, Developer, Planner, Explore, and Researcher agents plus all workflow skills (init-workflow, refine, to-prd, to-issues, developer-loop, researcher-loop, QA, architecture improvement, gh-tools) |
-| **ado** | `workflow/ado` | Azure DevOps integration — backlog item creation, ADO MCP tool reference, and templates |
+| **core** | `workflow/core` | Platform-agnostic foundation — Orchestrator, Developer, Planner, Explore, and Researcher agents plus the agnostic skills (init-workflow, refine, to-prd, to-issues, developer-loop, researcher-loop, QA, architecture improvement). Functions on its own; users wire their own tooling through `AGENTS.md`'s Platform Skills section. |
+| **gh** | `workflow/gh` | GitHub integration — `gh-tools` (issues, sub-issues, comments, search; prefers MCP, falls back to `gh` CLI) and `gh-init` (scaffolds GitHub `AGENTS.md` content; offers to install the GitHub MCP server / `gh` CLI). |
+| **ado** | `workflow/ado` | Azure DevOps integration — backlog item creation, ADO MCP tool reference, work item revert, and `ado-init` (scaffolds `AZURE_DEVOPS.md` and ADO `AGENTS.md` content). |
 
-Install **core** for the base workflow. Add **ado** when your team tracks work in Azure DevOps.
+Install **core** for the base workflow. Add **gh** and/or **ado** for first-party platform integrations. Consumers using a different tracker (Jira, Linear, GitLab, etc.) — or none at all — install only **core** and fill in the `## Platform Skills` section of `AGENTS.md` with their own skills, raw CLI invocations, or manual instructions.
 
 ## Quick start
 
@@ -37,6 +38,9 @@ irm https://aka.ms/apm-windows | iex
 # Core workflow (required)
 apm install ruuddrummen/copilot/workflow/core
 
+# GitHub integration (optional)
+apm install ruuddrummen/copilot/workflow/gh
+
 # Azure DevOps integration (optional)
 apm install ruuddrummen/copilot/workflow/ado
 ```
@@ -47,16 +51,28 @@ apm install ruuddrummen/copilot/workflow/ado
 
 ### 3. Run `init-workflow`
 
-> After installing the modules, run the `/init-workflow` skill. It interviews you for team-specific values, scaffolds `AGENTS.md` and (for ADO teams) `AZURE_DEVOPS.md`, and offers to install the GitHub MCP server and/or `gh` CLI in your workspace and devcontainer.
+> After installing the modules, run the `/init-workflow` skill. Core scaffolds an agnostic `AGENTS.md` skeleton (`## Platform Skills` + `## Agent Interaction`) and then delegates to whichever platform module(s) you installed. `gh-init` adds GitHub Platform Context, Terminology, and Platform Skills to `AGENTS.md` and offers to install the GitHub MCP server / `gh` CLI. `ado-init` adds the ADO equivalents and scaffolds `AZURE_DEVOPS.md`.
+>
+> If you installed only `core`, `init-workflow` leaves the `## Platform Skills` section as a placeholder for you to fill in.
 >
 > On subsequent runs (e.g., after a package upgrade) it merges in any new template sections without overwriting existing content.
+
+### Bring your own platform tooling
+
+If you use a tracker without a first-party module, install only `workflow/core` and edit the `## Platform Skills` section in `AGENTS.md` to describe how agents should interact with your tracker. You can:
+
+- Reference custom skills you have installed (any skill whose description matches the relevant operation works — agents pick by description).
+- Describe raw CLI invocations to use (e.g. `jira issue create ...`).
+- State that there is no tracker and that work items should be discussed in chat.
+
+Core agents never name a specific platform skill in their behaviour; they always defer to whatever you list here.
 
 <details>
 <summary>Manual GitHub MCP / CLI setup</summary>
 
-If `init-workflow` cannot manage your environment (e.g. no devcontainer, restricted shell), you can install GitHub access manually.
+If `gh-init` cannot manage your environment (e.g. no devcontainer, restricted shell), you can install GitHub access manually. The full snippets are inlined in `workflow/gh/skills/gh-init/SKILL.md`.
 
-GitHub users may use either the **GitHub MCP server** (`io.github.github/github-mcp-server`, added by the consumer to `.vscode/mcp.json`) or the `gh` **CLI** for GitHub operations — at least one is required. ADO-only teams can skip this step entirely.
+GitHub users may use either the **GitHub MCP server** (`io.github.github/github-mcp-server`, added by the consumer to `.vscode/mcp.json`) or the `gh` **CLI** for GitHub operations — at least one is required.
 
 #### Windows
 
@@ -85,14 +101,15 @@ After installation, authenticate with `gh auth login`.
 <details>
 <summary>Manual MCP server configuration</summary>
 
-Each module ships a `.mcp.json` declaring the MCP servers it needs. APM handles installation. If your environment requires manual setup, see the `.mcp.json` files in `workflow/core/` and `workflow/ado/` for the server declarations to add to your `.vscode/mcp.json`.
+Each module ships a `.mcp.json` declaring the MCP servers it needs. APM handles installation. If your environment requires manual setup, see the `.mcp.json` files in each module for the server declarations to add to your `.vscode/mcp.json`.
 
-| Module   | Servers                   |
-| -------- | ------------------------- |
-| **core** | Context7, Microsoft Learn |
-| **ado**  | Azure DevOps MCP          |
+| Module   | Servers                          |
+| -------- | -------------------------------- |
+| **core** | Context7, Microsoft Learn        |
+| **gh**   | GitHub MCP server                |
+| **ado**  | Azure DevOps MCP                 |
 
-> **Note:** `core` does **not** bundle the GitHub MCP server — it would force-load on ADO-only consumers. GitHub users who want MCP transport must add `io.github.github/github-mcp-server` to their own `.vscode/mcp.json`. Otherwise the `gh-tools` skill falls back to the `gh` CLI.
+> **Note:** `core` deliberately does **not** bundle the GitHub MCP server — it would force-load on consumers who do not use GitHub. Install `workflow/gh` (which ships the server in its `.mcp.json`) or add `io.github.github/github-mcp-server` to your own `.vscode/mcp.json` manually.
 
 </details>
 
@@ -101,35 +118,16 @@ Each module ships a `.mcp.json` declaring the MCP servers it needs. APM handles 
 
 #### AGENTS.md
 
-Every repo using the workflow needs an `AGENTS.md` at the root (or equivalent content in `.github/copilot-instructions.md`). This tells agents about your platform, terminology, and interaction preferences. Example:
+Every repo using the workflow needs an `AGENTS.md` at the root (or equivalent content in `.github/copilot-instructions.md`). At minimum it needs an `## Agent Interaction` section and a `## Platform Skills` section. Platform modules add `## Platform Context` and `## Terminology` on top.
+
+The agnostic skeleton scaffolded by core looks like this:
 
 ```markdown
 # AGENTS.md
 
-## Platform Context
-
-This repository uses Azure DevOps for work item tracking and code reviews.
-
-Remote URL: https://dev.azure.com/<org>/<project>/\_git/<repo>
-
-## Terminology
-
-| Abstract Term       | Azure DevOps         | GitHub            |
-| ------------------- | -------------------- | ----------------- |
-| Work item           | Product Backlog Item | Issue             |
-| Sub-work item       | Task                 | Sub-issue         |
-| Bug                 | Bug                  | Issue (bug label) |
-| Work item reference | #<ID>                | #<ID>             |
-| Code review         | Pull Request         | Pull Request      |
-
 ## Platform Skills
 
-Prefer skills prefixed with the platform name in use:
-
-- **ADO** — `ado-create-backlog-item` (create work items), `ado-revert-work-item` (restore previous version), `ado-tools` (general MCP tool reference).
-- **GitHub** — `gh-tools` (issues, sub-issues, comments, search; prefers MCP, falls back to gh CLI).
-
-Always read `AZURE_DEVOPS.md` for context before using Azure DevOps tools.
+<!-- Filled in by gh-init / ado-init, or by the user for bring-your-own setups. -->
 
 ## Agent Interaction
 
@@ -139,9 +137,35 @@ Always read `AZURE_DEVOPS.md` for context before using Azure DevOps tools.
 - Keep chat messages brief and to the point.
 ```
 
+A GitHub-flavoured `AGENTS.md` after `gh-init` runs adds, on top of the skeleton:
+
+```markdown
+## Platform Context
+
+This repository uses GitHub for work item tracking and code reviews.
+
+Remote URL: https://github.com/<owner>/<repo>
+
+## Terminology
+
+| Abstract Term       | GitHub            |
+| ------------------- | ----------------- |
+| Work item           | Issue             |
+| Sub-work item       | Sub-issue         |
+| Bug                 | Issue (bug label) |
+| Work item reference | #<ID>             |
+| Code review         | Pull Request      |
+
+## Platform Skills
+
+- **`gh-tools`** — issues, sub-issues, comments, labels, search. Prefers the GitHub MCP server; falls back to the `gh` CLI.
+```
+
+An ADO-flavoured `AGENTS.md` after `ado-init` runs adds the ADO equivalents (Platform Context with `Remote URL` and `ADO Repository ID`, an ADO Terminology table, and Platform Skills naming `ado-create-backlog-item`, `ado-revert-work-item`, and `ado-tools`).
+
 #### AZURE_DEVOPS.md (ADO teams only)
 
-If you installed the **ado** module, create an `AZURE_DEVOPS.md` at the repo root with your team-specific configuration:
+If you installed the **ado** module, `ado-init` scaffolds `AZURE_DEVOPS.md` from the template inlined in `workflow/ado/skills/ado-init/SKILL.md`. The minimal manual equivalent:
 
 ```markdown
 # Azure DevOps Team Configuration
@@ -150,11 +174,6 @@ If you installed the **ado** module, create an `AZURE_DEVOPS.md` at the repo roo
 
 - **Project:** `YourProject`
 - **Team name:** `Your Team`
-
-## Repository
-
-- **Name:** `your-repo`
-- **ID:** `00000000-0000-0000-0000-000000000000`
 
 ## Area Paths
 
@@ -165,18 +184,6 @@ If you installed the **ado** module, create an `AZURE_DEVOPS.md` at the repo roo
 ## Default Iteration
 
 `YourProject\Your Team`
-
-## Key Epics
-
-| Epic    | ID    | Description             |
-| ------- | ----- | ----------------------- |
-| My Epic | 12345 | Description of the epic |
-
-## Key Features
-
-| Feature    | ID    | Description                |
-| ---------- | ----- | -------------------------- |
-| My Feature | 67890 | Description of the feature |
 
 ## Stakeholders
 
@@ -222,15 +229,22 @@ Start by opening the **dev** prompt (or **dev-max** / **dev-sonnet** for model v
 | Skill | Description |
 | --- | --- |
 | **refine** | Relentless interview to reach shared understanding on an idea or design |
-| **to-prd** | Synthesize a PRD from conversation context and submit as a work item |
+| **refine-with-docs** | Refinement that challenges plans against the existing domain model and updates docs inline |
+| **to-prd** | Synthesize a PRD from conversation context and submit as a work item (uses a single canonical template; override via `<repo>/templates/prd.md`) |
 | **to-issues** | Break a PRD into independently-grabbable vertical-slice work items |
 | **create-plan** | Read work items and produce an ordered implementation plan with dependencies |
 | **developer-loop** | Run Developer in a loop to complete all tasks under a work item |
 | **researcher-loop** | Run Researcher in a loop to complete all research subtasks |
 | **qa** | Interactive QA session — user reports bugs, agent files work items |
 | **improve-codebase-architecture** | Explore for architectural friction and propose module-deepening refactors |
-| **init-workflow** | Initialize or update `AGENTS.md` and `AZURE_DEVOPS.md`, and optionally wire up the GitHub MCP server / `gh` CLI in your workspace and devcontainer |
-| **gh-tools** | Lean GitHub operations (issues, sub-issues, view, list, search) — ships with **core** for general GH use, prefers MCP and falls back to `gh` CLI |
+| **init-workflow** | Scaffold the agnostic `AGENTS.md` skeleton and delegate platform-specific scaffolding to whichever platform module(s) are installed |
+
+### GitHub skills (`workflow/gh`)
+
+| Skill | Description |
+| --- | --- |
+| **gh-tools** | Lean GitHub operations (issues, sub-issues, comments, labels, search) — prefers MCP, falls back to `gh` CLI |
+| **gh-init** | Scaffold GitHub `AGENTS.md` content; install the GitHub MCP server and/or `gh` CLI in workspace and devcontainer |
 
 ### ADO skills (`workflow/ado`)
 
@@ -239,6 +253,7 @@ Start by opening the **dev** prompt (or **dev-max** / **dev-sonnet** for model v
 | **ado-create-backlog-item** | Create Features, PBIs, and Bugs in Azure DevOps with templates and parent linking |
 | **ado-revert-work-item** | Restore an Azure DevOps work item to a previous revision from its history |
 | **ado-tools** | Fallback reference for all ADO MCP tool schemas (used only when dedicated skills are insufficient) |
+| **ado-init** | Scaffold ADO `AGENTS.md` content and `AZURE_DEVOPS.md` |
 
 ## Prompts
 
