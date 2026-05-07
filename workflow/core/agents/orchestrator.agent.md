@@ -49,17 +49,7 @@ The standard development workflow progresses through these phases. Recommend the
 
 ### Handoff
 
-If the user asks for a handoff, write a concise handoff note in a markdown block summarising: the current phase, any open work items or plan file, key decisions made, and what the next step is. This allows work to be resumed in a follow-up conversation.
-
-```markdown
-## Handoff — <topic>
-
-**Phase:** <current workflow phase>
-**Next step:** <what to do next>
-**Open work items:** <issue refs or "none">
-**Key decisions:** <brief bullets>
-**Context:** <any other notes needed to pick up where we left off>
-```
+If the user asks for a handoff, execute the `handoff` skill.
 
 ## Executing a Skill
 
@@ -85,13 +75,25 @@ If the user asks for a handoff, write a concise handoff note in a markdown block
 
 ## Upstream learnings
 
-When a subagent surfaces a `### Proposed Learning`, or you observe a cross-task pattern worth preserving, evaluate whether it would improve the workflow's agents, skills, or instructions and is worth upstreaming to the source repo (`ruuddrummen/copilot`). Learnings must be generally applicable across repositories — not specific to the current codebase. **Never act unilaterally.**
+When a subagent surfaces a `### Proposed Learning`, or you observe a cross-task pattern worth preserving, evaluate whether it would improve the workflow's agents, skills, or instructions and is worth upstreaming to the source repo (`ruuddrummen/copilot`). **Never act unilaterally.**
 
-1. Summarise the proposed learning and recommend a target location in the upstream repo.
-2. Use the Ask Questions tool to consult the user (file / refine first / skip).
-3. On approval, file the issue against `ruuddrummen/copilot` with a concise title and a body covering context, the learning, and the target location. Tag `learning`, reference the `workflow` directory, and hand the draft to the user if no GitHub access is available.
+### Generality bar
 
-Most interactions will not warrant a learning.
+Learnings must stand on their own as advice any repo's workflow could benefit from. Treat the originating repo as proprietary knowledge the upstream maintainer does not have access to. **Reject** learnings that:
+
+- Reference a specific framework, library, build tool, language runtime, or hosting provider (e.g. "when using <router>…", "in <test runner>…", "with <SDK>'s admin API…").
+- Describe how a particular repository or codebase is organised, named, or structured.
+- Quote work-item IDs, file paths, commit hashes, branch names, or other identifiers from the originating repo.
+- Carry inline reproduction details that only make sense in the originating context.
+
+If a candidate fails the bar, either rewrite it at a higher level of abstraction (the underlying pattern, not the stack) or drop it — those observations belong in the originating repo's own conventions, not upstream. Most interactions will not warrant a learning.
+
+### Procedure
+
+1. Apply the generality bar above. If it fails and cannot be abstracted, drop it.
+2. Summarise the proposed learning and recommend a target location in the upstream repo.
+3. Use the Ask Questions tool to consult the user (file / refine first / skip).
+4. On approval, file the issue against `ruuddrummen/copilot` with a concise title and a body covering context, the learning, and the target location. Tag `learning`, reference the `workflow` directory, and hand the draft to the user if no GitHub access is available.
 
 ## Handling Errors
 

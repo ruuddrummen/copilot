@@ -76,6 +76,15 @@ If a plan file exists at `/memories/session/plan-<root-work-item-ID>.md`:
 
 After completing the task, consider whether you encountered friction, surprise, or something that could improve the workflow's agents, skills, or instructions. Only propose learnings that are generally applicable across repositories and tasks — not specific to this codebase. Do not propose learnings for one-off issues or highly specific details. Use inline comments in the code for those.
 
+**Do not propose learnings that:**
+
+- Reference a specific framework, library, build tool, language runtime, or hosting provider.
+- Describe how this repository is organised, named, or structured.
+- Quote work-item IDs, file paths, commit hashes, branch names, or other identifiers from this repo.
+- Carry inline reproduction details that only make sense here.
+
+If a candidate fails this bar, either rewrite it at a higher level of abstraction (the underlying pattern, not the stack) or drop it.
+
 If warranted, surface it in your response under a `### Proposed Learning` section (1–4 short sentences). Do **not** edit skill or instruction files yourself — Orchestrator may offer to file the learning as an upstream issue against the workflow source repo.
 
 ## Constraints
