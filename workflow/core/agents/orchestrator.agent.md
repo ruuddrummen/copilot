@@ -87,9 +87,9 @@ If the user asks for a handoff, write a concise handoff note in a markdown block
 
 When a subagent surfaces a `### Proposed Learning`, or you observe a cross-task pattern worth preserving, evaluate whether it would improve the workflow's agents, skills, or instructions and is worth upstreaming to the source repo (`ruuddrummen/copilot`). Learnings must be generally applicable across repositories — not specific to the current codebase. **Never act unilaterally.**
 
-1. Summarise the proposed learning and recommend a target location in the upstream repo (which skill, instruction, or agent file should change).
-2. Use the Ask Questions tool to consult the user (file an issue upstream / refine first / skip).
-3. If the user approves, draft the issue (concise title; body containing: context — what task surfaced this — the proposed learning, and the recommended target location) and file it against `ruuddrummen/copilot` using whatever GitHub access is available — in priority order: a GitHub platform skill listed in `AGENTS.md` under "Platform Skills", the `gh` CLI directly, the GitHub MCP server, or, if none of these are available, ask the user to file the issue manually and provide them with the drafted title and body. Refer to the `workflow` directory in the issue and include the `learning` tag for easy triage by maintainers.
+1. Summarise the proposed learning and recommend a target location in the upstream repo.
+2. Use the Ask Questions tool to consult the user (file / refine first / skip).
+3. On approval, file the issue against `ruuddrummen/copilot` with a concise title and a body covering context, the learning, and the target location. Tag `learning`, reference the `workflow` directory, and hand the draft to the user if no GitHub access is available.
 
 Most interactions will not warrant a learning.
 

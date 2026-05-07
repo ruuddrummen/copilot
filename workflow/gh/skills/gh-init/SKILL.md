@@ -12,17 +12,15 @@ Wire GitHub access into a consumer repository:
 2. Install the GitHub MCP server into `.vscode/mcp.json` and/or the devcontainer.
 3. Install the `gh` CLI as a devcontainer feature.
 
-This skill is normally invoked from `core/skills/init-workflow` once it detects that `workflow/gh` is installed. It can also be run on its own.
+Normally invoked by `init-workflow` when it detects this skill is installed. Can also be run on its own.
 
 ## Process
 
 ### 1. Detect the agent instructions file
 
-Use the same detection order as `init-workflow`:
-
-1. If `.github/copilot-instructions.md` exists → use that file.
-2. If `AGENTS.md` exists → use that file.
-3. If neither exists → create `AGENTS.md`.
+1. `.github/copilot-instructions.md` if it exists.
+2. Else `AGENTS.md` if it exists.
+3. Else create `AGENTS.md`.
 
 ### 2. Append the GitHub AGENTS.md fragment
 

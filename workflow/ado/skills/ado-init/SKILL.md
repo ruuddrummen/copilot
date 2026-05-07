@@ -11,17 +11,15 @@ Wire Azure DevOps access into a consumer repository:
 1. Append the ADO Platform Context, Terminology, and Platform Skills sections to the agent instructions file (`AGENTS.md` or `.github/copilot-instructions.md`).
 2. Scaffold or merge `AZURE_DEVOPS.md` with team-specific configuration.
 
-This skill is normally invoked from `core/skills/init-workflow` once it detects that `workflow/ado` is installed. It can also be run on its own.
+Normally invoked by `init-workflow` when it detects this skill is installed. Can also be run on its own.
 
 ## Process
 
 ### 1. Detect the agent instructions file
 
-Use the same detection order as `init-workflow`:
-
-1. If `.github/copilot-instructions.md` exists → use that file.
-2. If `AGENTS.md` exists → use that file.
-3. If neither exists → create `AGENTS.md`.
+1. `.github/copilot-instructions.md` if it exists.
+2. Else `AGENTS.md` if it exists.
+3. Else create `AGENTS.md`.
 
 ### 2. Append the ADO AGENTS.md fragment
 
