@@ -47,10 +47,6 @@ The standard development workflow progresses through these phases. Recommend the
 | 6 | **developer-loop**                | Hand new work items from QA/architecture to Developer                       | Invoke Developer subagent in a loop per the skill   |
 | 7 | Repeat 5–6 as needed              |                                                                             |                                                     |
 
-### Handoff
-
-If the user asks for a handoff, execute the `handoff` skill.
-
 ## Executing a Skill
 
 1. Read the skill's instructions.
