@@ -3,7 +3,7 @@ name: handoff
 description: "Write a concise handoff note so work can be resumed in a follow-up conversation. Use when the user asks for a handoff, wants to pause, or needs to summarise current state before context is lost."
 ---
 
-Write a single markdown block summarising current state. Keep it concise — bullets, not prose.
+Write a single markdown block summarising current state. Keep it concise — bullets, not prose. Focus on what is necessary for the next workflow step.
 
 ```markdown
 ## Handoff — <topic>

@@ -1,6 +1,6 @@
 ---
 name: gh-tools
-description: "GitHub operations via MCP (preferred) or `gh` CLI. **Read this skill before invoking `gh` or GitHub MCP tools** — it covers the canonical commands and the multi-line body pattern that avoids temp files. Use when: creating, reading, updating, or closing issues or sub-issues; commenting on issues; applying or removing labels; searching code, issues, or repos; filing work items or bug reports; linking sub-issues to a parent issue."
+description: "GitHub operations via MCP (preferred) or `gh` CLI. It covers the canonical commands and the multi-line body pattern. ALWAYS Use when: creating, reading, updating, or closing issues or sub-issues; commenting on issues; applying or removing labels; searching code, issues, or repos; filing work items or bug reports."
 ---
 
 # GitHub tools
@@ -24,20 +24,13 @@ Infer the repo from `git remote -v` — `gh` does this automatically when run in
 
 ## Multi-line bodies
 
-Pipe a heredoc into `--body-file -` (or `--body-file -` on `gh issue edit`, `gh issue comment`, `gh pr create`, etc.) instead of writing to a temp file:
+Pipe a heredoc into `--body-file -` on `gh issue create`, `gh issue edit`, `gh issue comment`, `gh pr create`, etc. instead of writing to a temp file:
 
 ```bash
 gh issue create --title "PRD: ..." --label prd --body-file - <<'EOF'
-## Problem Statement
+## Title
 
-Multi-line markdown body goes here. Backticks, $variables, and other
-shell-special characters are passed through verbatim because of the
-single-quoted `'EOF'` heredoc delimiter.
-
-## Solution
-
+Markdown body.
 ...
 EOF
 ```
-
-The same pattern works for `gh issue edit <number> --body-file -`, `gh issue comment <number> --body-file -`, and `gh pr create --body-file -`. Use single-quoted `'EOF'` to suppress shell expansion inside the body; use unquoted `EOF` only when you deliberately want `$variable` interpolation.
