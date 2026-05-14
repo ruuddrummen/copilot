@@ -22,16 +22,16 @@ You receive a **root work item ID** and need to produce an ordered plan.
 Create a plan file using the format below. Use the exact format for tasks and notes as shown, replacing placeholders with actual work item IDs and titles.
 
 ```markdown
-## Plan for #<ID> — <Title>
+# Plan for #<ID> — <Title>
 
-### Tasks
+## Tasks
 1. [ ] **#<sub-ID> — <Title>** (no dependencies)
 2. [ ] **#<sub-ID> — <Title>** (depends on #<sub-ID>)
 3. [ ] **#<sub-ID> — <Title>** (depends on #<sub-ID>, #<sub-ID>)
 
-### Notes
+## Notes
 - Crucial cross-task dependencies and edit points, which can not be easily inferred when only reading the root issue and working on one of the sub-issues.
-### Reports
+## Reports
 <!-- This is where implementers of the issues append their reports after they complete each task -->
 ```
 

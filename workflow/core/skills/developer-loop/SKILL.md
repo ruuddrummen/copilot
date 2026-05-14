@@ -19,7 +19,7 @@ Read the root work item to check whether it has sub-work items.
 
 ### 2. Create Plan
 
-**Always invoke the Planner agent** with the root work item ID. The Planner will read all sub-work items, analyse the work, and create the plan file. There are no exceptions — do not skip or substitute the Planner agent regardless of how the work items were created or what context is already available.
+**Always invoke the Planner agent** with the root work item ID. The Planner will read all sub-work items, analyse the work, decide on the implementation order, and create the plan file. There are no exceptions — do not skip or substitute the Planner agent regardless of how the work items were created or what context is already available.
 
 ### 3. Loop
 
