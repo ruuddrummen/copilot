@@ -11,6 +11,7 @@ tools:
     edit,
     search,
     "ado-remote-mcp/*",
+    github/*,
     todo,
     execute,
   ]
