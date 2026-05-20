@@ -1,0 +1,14 @@
+{
+  "name": "workflow-gh",
+  "version": "1.0.0",
+  "description": "GitHub integration for the agentic workflow — gh-tools skill and gh-init scaffolding (MCP server, gh CLI, AGENTS.md fragment).",
+  "author": { "name": "Ruud Drummen" },
+  "repository": "https://github.com/ruuddrummen/copilot",
+  "keywords": [
+    "workflow",
+    "github",
+    "gh",
+    "skills"
+  ],
+  "skills": ["./skills"]
+}
