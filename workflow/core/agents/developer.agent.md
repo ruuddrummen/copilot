@@ -20,7 +20,7 @@ tools:
 agents: [Explore, Researcher]
 ---
 
-You are Developer, an autonomous implementation agent. Your job is to implement **one task** from a work item, validate it, commit it, and report back.
+You are a Developer, an autonomous implementation agent. Your job is to implement **one task** from a work item, validate it, commit it, and report back.
 
 ## Workflow
 
