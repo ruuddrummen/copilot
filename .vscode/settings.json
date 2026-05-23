@@ -1,0 +1,10 @@
+{
+    "chat.agentFilesLocations": {
+        "workflow/core/agents": true
+    },
+    "chat.agentSkillsLocations": {
+        "workflow/core/skills": true,
+        "workflow/gh/skills": true,
+        "workflow/ado/skills": true
+    }
+}

@@ -1,130 +1,112 @@
 ---
 name: qa
-description: Interactive QA session where user reports bugs or issues conversationally, and the agent files work items. Explores the codebase in the background for context and domain language. Use when user wants to report bugs, do QA, file issues conversationally, or mentions "QA session".
+description: Interactive QA session where the user reports findings conversationally. Gather all findings first, then group related ones, then decide per group whether to file as work items or fix immediately. Use when the user wants to report bugs, do QA, file issues conversationally, or mentions "QA session".
 ---
 
 # QA Session
 
-Run an interactive QA session. The user describes problems they're encountering. You clarify, explore the codebase for context, and file work items that are durable, user-focused, and use the project's domain language.
+Three phases: **Gather**, **Group**, **Resolve**. Findings can be bugs or spec changes derived from implementation insights.
 
-## For each issue the user raises
+## Phase 1 — Gather
 
-### 1. Listen and lightly clarify
+The user posts findings as they encounter them. Make each one unambiguous, then get out of the way for the next.
 
-Let the user describe the problem in their own words. Ask **at most 2-3 short clarifying questions** focused on:
+For each finding:
 
-- What they expected vs what actually happened
-- Steps to reproduce (if not obvious)
-- Whether it's consistent or intermittent
+1. If it is already 100% clear, acknowledge briefly. Do not restate, question, or propose fixes.
+2. If anything is unclear, explore the codebase first. After exploring:
+   - If now clear, acknowledge briefly.
+   - If still ambiguous, prefer **stating assumptions for the user to confirm** over asking open questions.
+3. Do not propose fixes or diagnose root causes. That's for later phases.
 
-Do NOT over-interview. If the description is clear enough to file, move on.
+Keep findings in the conversation by default. If the session grows long enough that context is at risk, switch to appending each clarified finding to a session-memory scratch file (append-only). Acknowledge with "added to memory" — do not echo the finding back.
 
-### 2. Explore the codebase in the background
+Continue until the user signals they are done adding findings.
 
-While talking to the user, invoke an Explore Agent in the background to understand the relevant area. The goal is NOT to find a fix — it's to:
+## Phase 2 — Group
 
-- Learn the domain language used in that area (check UBIQUITOUS_LANGUAGE.md if it exists)
-- Understand what the feature is supposed to do
-- Identify the user-facing behavior boundary
+Triggered when the user signals done.
 
-This context helps you write a better work item — but the work item itself should NOT reference specific files, line numbers, or internal implementation details.
+### Draft groups
 
-### 3. Assess scope: single work item or breakdown?
+A **group** is a set of closely related findings to address together. Groups may mix bugs and spec changes.
 
-Before filing, decide whether this is a **single work item** or needs to be **broken down** into multiple work items.
+Findings belong in the same group when they:
 
-Break down when:
+- Hit the **same vertical slice** — the same end-to-end behavioral path.
+- Would modify the **same surface in the same way** (same data type, module, component, writer, dialog, etc.). This is the file-level expression of the slice rule and a strong signal on its own.
 
-- The fix spans multiple independent areas (e.g. "the form validation is wrong AND the success message is missing AND the redirect is broken")
-- There are clearly separable concerns that different people could work on in parallel
-- The user describes something that has multiple distinct failure modes or symptoms
+Keep findings in **separate groups** when they touch genuinely different slices, or carry a meaningfully different *kind* of risk (layout vs. data-shape vs. rename, etc.), even with incidental file overlap.
 
-Keep as a single work item when:
+Prefer fewer, well-scoped groups over many thin ones that fight each other for the same surface. Groups do **not** need vertical-slice treatment (no HITL/AFK tagging, no acceptance criteria, no user-story mapping).
 
-- It's one behavior that's wrong in one place
-- The symptoms are all caused by the same root behavior
+### Review with the user
 
-### 4. File the work item(s)
+Present the grouping as a numbered list. For each group:
 
-Create work items (as standalone work items, or as sub-work items when a parent work item exists). Do NOT ask the user to review first — just file and share URLs.
+- **Title**
+- **Findings included** — one-liners referencing the originals
+- **Blocked by** — another group, only if there's a genuine ordering dependency
 
-Work items must be **durable** — they should still make sense after major refactors. Write from the user's perspective.
+Ask whether granularity, splits/merges, and blocking relationships are right. Iterate until approved.
 
-#### For a single work item
+## Phase 3 — Resolve
 
-Use this template:
+For each approved group, ask the user what to do. Per group:
 
-```
-## What happened
+- **File as a work item**
+- **Fix immediately** (no work item)
+- **Drop**
 
-[Describe the actual behavior the user experienced, in plain language]
+### File
 
-## What I expected
+Create a work item using the template below — as a sub-work item when a parent work item exists, otherwise standalone. Create in dependency order so "Blocked by" can reference real IDs. After filing, print the URLs with any blocking relationships summarised.
 
-[Describe the expected behavior]
+<work-item-template>
+## Parent
 
-## Steps to reproduce
+Parent work item reference (only if the QA session was running under one).
 
-1. [Concrete, numbered steps a developer can follow]
-2. [Use domain terms from the codebase, not internal module names]
-3. [Include relevant inputs, flags, or configuration]
+## What's wrong or needs to change
 
-## Additional context
+Concise description covering all findings in this group.
 
-[Any extra observations from the user or from codebase exploration that help frame the issue — e.g. "this only happens when using the Docker layer, not the filesystem layer" — use domain language but don't cite files]
-```
+## Expected behavior or desired change
 
-#### For a breakdown (multiple work items)
+What it should be instead.
 
-Create work items in dependency order (blockers first) so you can reference real work item IDs in the "Blocked by" field.
+## How to reproduce or observe
 
-Use this template for each sub-work item:
+1. Concrete numbered steps using domain terms.
 
-```
-## Parent work item
-
-Parent work item reference (if you created a tracking work item) or "Reported during QA session"
-
-## What's wrong
-
-[Describe this specific behavior problem — just this slice, not the whole report]
-
-## What I expected
-
-[Expected behavior for this specific slice]
-
-## Steps to reproduce
-
-1. [Steps specific to THIS work item]
+Omit for pure spec changes with no reproducible symptom.
 
 ## Blocked by
 
-- Work item reference (if this work item can't be fixed until another is resolved)
+- Reference to a blocking work item, if any.
 
-Or "None — can start immediately" if no blockers.
+Omit when none.
 
 ## Additional context
 
-[Any extra observations relevant to this slice]
-```
+Extra observations that frame the group. Domain language only; no file paths or line numbers.
+</work-item-template>
 
-When creating a breakdown:
+Rules:
 
-- **Prefer many thin work items over few thick ones** — each should be independently fixable and verifiable
-- **Mark blocking relationships honestly** — if work item B genuinely can't be tested until work item A is fixed, say so. If they're independent, mark both as "None — can start immediately"
-- **Create work items in dependency order** so you can reference real work item IDs in "Blocked by"
-- **Maximize parallelism** — the goal is that multiple people (or agents) can grab different work items simultaneously
+- No file paths or line numbers — they go stale.
+- Use the project's domain language (check `CONTEXT.md` or equivalent).
+- Describe behaviors, not code.
+- A developer should grasp the work item in 30 seconds.
 
-#### Rules for all work item bodies
+### Fix immediately
 
-- **No file paths or line numbers** — these go stale
-- **Use the project's domain language** (check UBIQUITOUS_LANGUAGE.md if it exists)
-- **Describe behaviors, not code** — "the sync service fails to apply the patch" not "applyPatch() throws on line 42"
-- **Reproduction steps are mandatory** — if you can't determine them, ask the user
-- **Keep it concise** — a developer should be able to read the work item in 30 seconds
+Proceed to implement the fix directly, using the group description as the spec. No work item is created.
 
-After filing, print the work item URLs (with blocking relationships summarized) in a brief chat message, then **invoke the Ask Questions tool** to ask whether there are more issues with options like "Report another issue" / "We're done" / <Free-text-field>.
+### Drop
 
-### 5. Continue the session
+Discard the group. Note it as dropped in the session summary.
 
-Keep going until the user says they're done via the Ask Questions tool. Each work item is independent — don't batch them. Never end a QA turn without invoking the Ask Questions tool.
+## Re-entry
+
+The user may add findings at any time. Return to Phase 1 for the new finding, then re-run Phase 2 over the combined set before continuing Phase 3.
