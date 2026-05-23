@@ -76,14 +76,19 @@ When a subagent surfaces a `### Proposed Learning`, or you observe a cross-task 
 
 ### Generality bar
 
-Learnings must stand on their own as advice any repo's workflow could benefit from. Treat the originating repo as proprietary knowledge the upstream maintainer does not have access to. **Reject** learnings that:
+Learnings must apply to any repo's workflow. Treat the originating repo as proprietary. Two conditions, both required.
 
-- Reference a specific framework, library, build tool, language runtime, or hosting provider (e.g. "when using <router>…", "in <test runner>…", "with <SDK>'s admin API…").
-- Describe how a particular repository or codebase is organised, named, or structured.
-- Quote work-item IDs, file paths, commit hashes, branch names, or other identifiers from the originating repo.
-- Carry inline reproduction details that only make sense in the originating context.
+**1. Stack-agnostic.** Reject if it names a specific framework, library, build tool, runtime, or provider; describes this repo's structure or naming; or quotes IDs, paths, commits, or branches.
 
-If a candidate fails the bar, either rewrite it at a higher level of abstraction (the underlying pattern, not the stack) or drop it — those observations belong in the originating repo's own conventions, not upstream. Most interactions will not warrant a learning.
+**2. Workflow scope.** Reject if adopting it wouldn't edit a file under `workflow/` or change agent behaviour. Coding tips, refactoring heuristics, and language patterns belong in repo conventions — even when phrased abstractly.
+
+All three checks must be yes:
+
+1. Stack-agnostic?
+2. Would adoption edit a file under `workflow/`?
+3. Would an agent behave differently?
+
+If it fails, rewrite at a higher abstraction or drop it.
 
 ### Procedure
 

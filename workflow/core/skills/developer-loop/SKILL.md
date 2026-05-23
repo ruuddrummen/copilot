@@ -26,7 +26,7 @@ Repeat until all tasks are complete:
    - **`ALL_ISSUES_CLOSED`**: Exit the loop — all work is done.
    - **`FAILED`**: Enter the [Error Recovery](#error-recovery) flow.
    - **No recognized keyword**: Report this to the user, but determine success or failure based on the response and continue accordingly.
-5. **Surface proposed learnings.** If Developer's response includes a `### Proposed Learning`, or if a loop-level pattern emerges that could improve the workflow's agents, skills, or instructions, follow the Orchestrator's `## Upstream learnings` flow: summarise, recommend, consult the user, file an upstream issue only on approval. Only surface learnings that are generally applicable — not specific to the current codebase.
+5. **Surface proposed learnings.** If Developer's response includes a `### Proposed Learning`, or a loop-level pattern emerges, follow the Orchestrator's `## Upstream learnings` flow: summarise, recommend, consult the user, file only on approval. Apply the full bar — **stack-agnostic** and **workflow scope** (would adoption edit a file under `workflow/` and change agent behaviour?). Coding tips belong in repo conventions.
 
 ### 3. Completion
 

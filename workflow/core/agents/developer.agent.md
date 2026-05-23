@@ -74,15 +74,12 @@ If a plan file exists at `/memories/session/plan-<root-work-item-ID>.md`:
 
 ### 8. Surface proposed learning
 
-If the task surfaced a pattern that could improve the workflow's agents, skills, or instructions, add a `### Proposed Learning` section (1–4 sentences) to your response. Orchestrator decides whether to file it upstream — do not edit skill or instruction files yourself.
+If the task surfaced a pattern that could improve the workflow's agents, skills, or instructions, add a `### Proposed Learning` section (1–4 sentences) to your response. Orchestrator decides whether to file it; do not edit skill or instruction files yourself.
 
-The bar is **generally applicable across repos and tasks**. Skip or rewrite at a higher abstraction if it:
+Two conditions, both required:
 
-- Names a specific framework, library, runtime, or provider.
-- Describes this repo's structure, naming, or organisation.
-- Quotes IDs, paths, commits, or branches from this repo.
-
-One-off details belong in code comments, not learnings. Most tasks won't warrant one.
+- **Stack-agnostic.** No specific framework/library/runtime/provider, no repo-structure references, no IDs/paths/commits/branches.
+- **Workflow scope.** Adopting it would edit a file under `workflow/` and change agent behaviour. Coding tips and refactoring heuristics belong in repo conventions, not here — even when phrased abstractly.
 
 ## Constraints
 
