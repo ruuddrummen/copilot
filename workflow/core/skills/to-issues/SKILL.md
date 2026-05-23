@@ -27,8 +27,12 @@ Slices may be 'HITL' or 'AFK'. HITL slices require human interaction, such as an
 <vertical-slice-rules>
 - Each slice delivers a narrow but COMPLETE path through every layer (schema, API, UI, tests)
 - A completed slice is demoable or verifiable on its own
-- Prefer many thin slices over few thick ones
+- Prefer many thin slices over few thick ones — but only when they don't fight each other for the same surface
+- When sibling slices would each hit the same vertical slice, or modify the same files in the same way (extending the same data type, adding columns to the same writer, adding cells to the same dialog), bundle them into one slice
+- Keep slices separate when they touch genuinely different surfaces, or carry a meaningfully different *kind* of risk (layout vs. data-shape vs. rename, etc.), even with incidental file overlap
 </vertical-slice-rules>
+
+After drafting, do a quick **slice-overlap audit**: identify sibling slices that share a vertical slice or modify the same files in the same way, and bundle them. A single slice "apply the pattern across all items" reviews more honestly than N parallel PRs racing for the same surface — and the intermediate "some applied, others not" state is rarely a release-quality milestone.
 
 ### 4. Quiz the user
 
