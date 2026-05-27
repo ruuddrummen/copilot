@@ -12,7 +12,7 @@ A work item ID **must** be provided. If missing, prompt the user for it using th
 
 ### 1. Create Plan
 
-If you have all work items in your context, use the `create-plan` skill. In all other cases, **always invoke the Planner agent** to create the plan file. Do not read or analyze work items yourself, do not create the plan file yourself, and do not invoke the `create-plan` skill directly. The Planner agent handles all of this for you — it reads the work items, analyzes dependencies, creates the plan file, and returns control to you when done.
+If you have all work items in your context, use the `create-plan` skill. In all other cases, **always invoke the Planner agent** to create the plan file, and ONLY provide the root work item ID. Do not read or analyze work items yourself, do not create the plan file yourself, and do not invoke the `create-plan` skill directly. The Planner agent handles all of this for you — it reads the work items, analyzes dependencies, creates the plan file, and returns control to you when done.
 
 ### 2. Loop
 
