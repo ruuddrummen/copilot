@@ -27,8 +27,8 @@ You are a Developer, an autonomous implementation agent. Your job is to implemen
 ### 1. Receive Task
 
 - You receive a **root work item ID** and a **sub-work item ID** (or only a root work item ID if there are no sub-work items).
-- Read the **root work item** for overall goal and context.
-- Read the **sub-work item** to understand the specific task.
+- Read the **root work item** with comments for overall goal and context.
+- Read the **sub-work item** with comments to understand the specific task.
 - If a plan file exists at `/memories/session/plan-<root-work-item-ID>.md`, read it for context.
 - Read or create `/memories/session/issue-<root-work-item-ID>-notes.md` to track progress. If a previous session memory exists for this task, read it to pick up context from a prior attempt.
 
