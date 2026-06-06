@@ -1,38 +1,33 @@
 ---
 name: to-issues
-description: "Break a plan, spec, or PRD into independently-grabbable work items using tracer-bullet vertical slices. Use when user wants to convert a plan into work items, create implementation tickets, break down work into tasks, or slice a feature into stories."
-argument-hint: "Work item ID, URL, or paste PRD text directly"
+description: Break a plan, spec, or PRD into independently-grabbable issues on the project issue tracker using tracer-bullet vertical slices. Use when user wants to convert a plan into issues, create implementation tickets, or break down work into issues.
 ---
 
 # To Issues
 
-Break a plan into independently-grabbable work items using vertical slices (tracer bullets).
+Break a plan into independently-grabbable issues using vertical slices (tracer bullets).
 
 ## Process
 
 ### 1. Gather context
 
-Work from whatever is already in the conversation context. If the user passes a work item ID or URL as an argument, fetch the work item (including comments).
+Work from whatever is already in the conversation context. If the user passes an issue reference (issue number, URL, or path) as an argument, fetch it from the issue tracker and read its full body and comments.
 
 ### 2. Explore the codebase (optional)
 
-If you have not already explored the codebase, do so to understand the current state of the code.
+If you have not already explored the codebase, do so to understand the current state of the code. Issue titles and descriptions should use the project's domain glossary vocabulary, and respect ADRs in the area you're touching.
 
 ### 3. Draft vertical slices
 
-Break the plan into **tracer bullet** work items. Each work item is a thin vertical slice that cuts through ALL integration layers end-to-end, NOT a horizontal slice of one layer.
+Break the plan into **tracer bullet** issues. Each issue is a thin vertical slice that cuts through ALL integration layers end-to-end, NOT a horizontal slice of one layer.
 
 Slices may be 'HITL' or 'AFK'. HITL slices require human interaction, such as an architectural decision or a design review. AFK slices can be implemented and merged without human interaction. Prefer AFK over HITL where possible.
 
 <vertical-slice-rules>
 - Each slice delivers a narrow but COMPLETE path through every layer (schema, API, UI, tests)
 - A completed slice is demoable or verifiable on its own
-- Prefer many thin slices over few thick ones — but only when they don't fight each other for the same surface
-- When sibling slices would each hit the same vertical slice, or modify the same files in the same way (extending the same data type, adding columns to the same writer, adding cells to the same dialog), bundle them into one slice
-- Keep slices separate when they touch genuinely different surfaces, or carry a meaningfully different *kind* of risk (layout vs. data-shape vs. rename, etc.), even with incidental file overlap
+- Prefer many thin slices over few thick ones
 </vertical-slice-rules>
-
-After drafting, do a quick **slice-overlap audit**: identify sibling slices that share a vertical slice or modify the same files in the same way, and bundle them. A single slice "apply the pattern across all items" reviews more honestly than N parallel PRs racing for the same surface — and the intermediate "some applied, others not" state is rarely a release-quality milestone.
 
 ### 4. Quiz the user
 
@@ -52,20 +47,22 @@ Ask the user:
 
 Iterate until the user approves the breakdown.
 
-### 5. Create the work items
+### 5. Publish the issues to the issue tracker
 
-For each approved slice, create a sub-work item (when a parent work item exists) or a standalone work item. Use the work item body template below.
+For each approved slice, publish a new issue to the issue tracker. Use the issue body template below. These issues are considered ready for AFK agents, so publish them with the correct triage label unless instructed otherwise.
 
-Create work items in dependency order (blockers first) so you can reference real work item IDs in the "Blocked by" field.
+Publish issues in dependency order (blockers first) so you can reference real issue identifiers in the "Blocked by" field.
 
-<work-item-template>
+<issue-template>
 ## Parent
 
-Parent work item reference (if the source was a work item, otherwise omit this section)
+A reference to the parent issue on the issue tracker (if the source was an existing issue, otherwise omit this section).
 
 ## What to build
 
 A concise description of this vertical slice. Describe the end-to-end behavior, not layer-by-layer implementation.
+
+Avoid specific file paths or code snippets — they go stale fast. Exception: if a prototype produced a snippet that encodes a decision more precisely than prose can (state machine, reducer, schema, type shape), inline it here and note briefly that it came from a prototype. Trim to the decision-rich parts — not a working demo, just the important bits.
 
 ## Acceptance criteria
 
@@ -75,10 +72,10 @@ A concise description of this vertical slice. Describe the end-to-end behavior, 
 
 ## Blocked by
 
-- Blocked by work item reference (if any)
+- A reference to the blocking ticket (if any)
 
 Or "None - can start immediately" if no blockers.
 
-</work-item-template>
+</issue-template>
 
-Do NOT close or modify any parent work item.
+Do NOT close or modify any parent issue.

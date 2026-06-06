@@ -52,15 +52,15 @@ Ask whether granularity, splits/merges, and blocking relationships are right. It
 
 ## Phase 3 — Resolve
 
-For each approved group, ask the user what to do. Per group:
+Ask once: **What should we do?** (e.g., `file 1–3, implement 4, drop 5`)
 
-- **File as a work item**
-- **Fix immediately** (no work item)
-- **Drop**
+Options: `file` (work item), `implement` (fix now), `drop` (discard).
+
+Parse reply, then execute in order: file (dependency order), implement, drop.
 
 ### File
 
-Create a work item using the template below — as a sub-work item when a parent work item exists, otherwise standalone. Create in dependency order so "Blocked by" can reference real IDs. After filing, print the URLs with any blocking relationships summarised.
+Create work item from template below — standalone or as sub-item. File in dependency order so "Blocked by" can reference real IDs. Print URLs after.
 
 <work-item-template>
 ## Parent
