@@ -131,7 +131,7 @@ The agnostic skeleton scaffolded by core looks like this:
 
 ## Agent Interaction
 
-- Before using the Ask Questions tool, provide relevant context and reasoning so the user can make an informed choice.
+- Before asking the user a question, provide relevant context and reasoning so the user can make an informed choice.
 - Include recommended answers in question options whenever possible.
 - Before asking the user, try to answer the question by exploring the codebase or consulting documentation.
 - Keep chat messages brief and to the point.

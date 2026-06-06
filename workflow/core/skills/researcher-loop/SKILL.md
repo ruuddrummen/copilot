@@ -6,7 +6,7 @@ argument-hint: "Root work item ID (e.g. 123)"
 
 ## Prerequisites
 
-A work item ID **must** be provided. If missing, prompt the user for it using the Ask Questions tool.
+A work item ID **must** be provided. If missing, ask the user for it.
 
 ## Flow
 
@@ -42,7 +42,7 @@ Repeat until all tasks are complete:
 When all tasks are done (all checkboxes marked `[x]`):
 
 1. Summarize what was researched and which output files were written.
-2. Use the Ask Questions tool to present follow-up options to the user.
+2. Present follow-up options to the user.
 
 ---
 
@@ -63,7 +63,7 @@ When Researcher fails (returns `FAILED`, no keyword, or an empty response):
 
 1. **First failure**: Invoke Researcher again on the **same task** with this additional context:
    > "Previous attempt did not complete. Review the plan file and work item, then retry the research task."
-2. **Second failure on the same task**: **Stop.** Report the failure to the user using the Ask Questions tool with these options:
+2. **Second failure on the same task**: **Stop.** Report the failure to the user with these options:
    - **Skip this task** and continue with the next available group.
    - **Abort** the loop entirely and discuss the problem.
    - **Retry once more** (user's discretion).

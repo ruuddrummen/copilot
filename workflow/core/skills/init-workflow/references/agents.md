@@ -16,7 +16,7 @@ If you have no platform skills, replace this comment with a brief description of
 
 ## Agent Interaction
 
-- Before using the Ask Questions tool, provide relevant context and reasoning so the user can make an informed choice. Do not put the context in the question or question options — put it in the chat message before invoking the tool. The question should be as concise as possible, and the options should be brief and actionable.
+- Before asking the user a question, provide relevant context and reasoning so the user can make an informed choice. Keep the question as concise as possible, and make any options brief and actionable.
 - Include recommended answers in question options whenever possible.
 - Before asking the user, try to answer the question by exploring the codebase or consulting documentation.
 - Keep chat messages brief and to the point.

@@ -5,7 +5,6 @@ tools:
   [
     vscode/memory,
     vscode/resolveMemoryFileUri,
-    vscode/askQuestions,
     vscode/toolSearch,
     read,
     edit,
@@ -68,7 +67,7 @@ Do NOT ask the user questions in loop mode. Proceed autonomously.
 
 ## 2. Alignment
 
-- Use the Ask Questions tool to clarify ambiguous or underspecified requests before proceeding.
+- Ask the user to clarify ambiguous or underspecified requests before proceeding.
 - Confirm the scope and expected output format with the user when in doubt.
 
 ## 3. Execution
@@ -85,7 +84,7 @@ Do NOT ask the user questions in loop mode. Proceed autonomously.
 Present complex findings as a **DRAFT**. On user input:
 
 - Changes requested → revise and present an updated draft.
-- Questions asked → clarify using the Ask Questions tool
+- Questions asked → clarify directly with the user.
 - Approval given → acknowledge.
 
 </workflow>
