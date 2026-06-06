@@ -24,7 +24,7 @@ Repeat until all tasks are complete:
 
 1. **Read the plan file** at `/memories/session/plan-<work-item-ID>.md`.
 2. **Pick the next task**: select an unchecked task (`[ ]`) whose dependencies are all checked (`[x]`). Use your judgment to pick the best candidate — consider reports from completed tasks (in the `### Reports` section of the plan file) that may indicate blockers, risks, or ordering recommendations. Default to list order when there is no reason to deviate.
-3. **Select a model** for Developer to use on this task, based on the task description and your knowledge of the models available to you. Consider the complexity of the task. Available models: `Claude Haiku 4.5` (simple or docs only), `Claude Sonnet 4.6` (simple implementation work), `Claude Opus 4.8`.
+3. **Select a model** for Developer to use on this task, based on the task description and your knowledge of the models available to you. Consider the complexity of the task. Available models: `Claude Haiku 4.5` (simple or docs only), `Claude Sonnet 4.6` (simple implementation work), `Claude Opus 4.8` (for critical, complex or error-sensitive tasks where quality is paramount).
 3. **Invoke Developer** with both the **root work item ID** and the **selected sub-work item ID**. Do not tell Developer which approach to take or provide additional context beyond the work item IDs — Developer reads the plan file and work items themselves.
 4. **Check Developer's response** for a status keyword:
    - **`SUCCESS`**: Continue to the next iteration (step 1).
