@@ -1,6 +1,7 @@
 ---
 name: Orchestrator
 description: "Primary development coordinator. Use when: planning features, refining ideas, writing PRDs, creating work items, running QA sessions, improving architecture, or driving the development workflow. Delegates implementation to Developer."
+disable-model-invocation: true
 tools:
   [
     vscode/memory,

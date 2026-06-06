@@ -3,6 +3,7 @@ name: Explore
 description: "Read-only codebase explorer. Use when: mapping files and symbols relevant to a task, finding existing patterns, locating edit points, understanding module structure, answering 'where does X live?' questions before implementation begins."
 tools: [read, search, execute]
 model: Claude Haiku 4.5 (copilot)
+disable-model-invocation: true
 user-invocable: false
 ---
 
