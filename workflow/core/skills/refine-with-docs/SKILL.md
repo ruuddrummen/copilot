@@ -12,6 +12,8 @@ Interview me relentlessly about every aspect of this plan until we reach a share
 
 Ask one question at a time, and provide appropriate context BEFORE each question.
 
+When you believe we have reached a shared understanding, confirm with me.
+
 </what-to-do>
 
 <supporting-info>
