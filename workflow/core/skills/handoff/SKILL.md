@@ -8,7 +8,7 @@ Write a handoff note to a new `handoffs/<YYYY-MM-DD>-<topic>.md` file at the wor
 The note itself is the markdown <template> below. Keep it concise, to the point, and focussed on current and next steps. Use bullets, do not use prose language.
 
 - If applicable, suggest next skills to use.
-- If applicable, refer to file paths and line numbers instead of verbally describing code.
+- Do not duplicate content already captured in other artifacts (specs, plans, ADRs, issues, commits, diffs). Reference them by path or URL instead.
 
 After writing the file, summarise its location in chat (one line). Do not paste the full contents back into chat — the file is the deliverable.
 
