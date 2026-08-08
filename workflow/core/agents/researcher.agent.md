@@ -45,7 +45,7 @@ Cycle through these phases based on input. This is iterative, not linear.
 
 When you receive both a **root work item ID** and a **sub-work item ID** as input, you are operating in autonomous loop mode. Follow these steps exactly:
 
-1. **Read the plan file** at `/memories/session/plan-<root-work-item-ID>.md`.
+1. **Read the plan file** at `.work/issues/<root-work-item-ID>-*/plan.md`.
 2. **Read the sub-work item** via the platform skills listed in `AGENTS.md` under "Platform Skills" to get the full description, scope, and acceptance criteria.
 3. **Determine the output file path** from the acceptance criteria of the sub-work item. The target file path is always explicitly stated there.
 4. **Conduct research** using web and documentation tools. For work-item-tracker or code-search lookups, go through the platform skills listed in `AGENTS.md` under "Platform Skills". Cover all capability groups and scope defined in the work item.

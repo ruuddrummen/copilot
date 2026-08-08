@@ -19,13 +19,13 @@ Read the root work item to check whether it has sub-work items.
 
 ### 2. Create Plan
 
-**Always invoke the Planner agent** with the root work item ID. The Planner will read all sub-work items, analyse the work, and create the plan file at `/memories/session/plan-<work-item-ID>.md`. There are no exceptions — do not skip or substitute the Planner agent regardless of how the work items were created or what context is already available.
+**Always invoke the Planner agent** with the root work item ID. The Planner will read all sub-work items, analyse the work, and create the plan file at `.work/issues/<work-item-ID>-*/plan.md`. There are no exceptions — do not skip or substitute the Planner agent regardless of how the work items were created or what context is already available.
 
 ### 3. Loop
 
 Repeat until all tasks are complete:
 
-1. **Read the plan file** at `/memories/session/plan-<work-item-ID>.md`.
+1. **Read the plan file** at `.work/issues/<work-item-ID>-*/plan.md`.
 2. **Identify the next parallel group**: collect all unchecked tasks (`[ ]`) whose dependencies are all checked (`[x]`). These tasks have no unmet dependencies and can run simultaneously.
 3. **Invoke Researcher in parallel** for each task in the group — pass both the **root work item ID** and the **selected sub-work item ID** to each Researcher instance. Do not provide extra context or guidance beyond the work item IDs — the Researcher reads the plan file and work items itself.
 4. **Wait for all parallel Researcher calls to complete**, then check each response for a status keyword:

@@ -12,7 +12,7 @@ A root work item ID is required. Ask for it when absent.
 
 ### 1. Create Plan
 
-Invoke Planner with only the root work item ID. Continue when Planner has created `/memories/session/plan-<root-ID>.md`; otherwise enter [Recovery](#recovery).
+Invoke Planner with only the root work item ID. Continue when Planner has created `.work/issues/<root-ID>-*/plan.md`; otherwise enter [Recovery](#recovery).
 
 ### 2. Prepare branch
 
@@ -22,7 +22,7 @@ Record the current commit as the review baseline. On `main` or `release/*`, crea
 
 Repeat:
 
-1. Read `/memories/session/plan-<root-ID>.md`.
+1. Read `.work/issues/<root-ID>-*/plan.md`.
 2. When every task is checked (`[x]`), leave the loop.
 3. Select an unchecked task whose listed dependencies are checked. Use `### Reports` to account for downstream blockers or ordering changes; otherwise use list order. If no task is ready, enter [Recovery](#recovery) with the dependency deadlock.
 4. Select Developer's model: `GPT 5.6 Luna` for simple or documentation tasks, `Claude Sonnet 5` for implementation, or `Claude Opus 5` for critical, complex, or error-sensitive work.

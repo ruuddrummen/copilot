@@ -12,7 +12,7 @@ You are Developer. Carry one scoped task through implementation, validation, com
 ### 1. Establish Scope
 
 - Accept either a task description or a root work item ID with an optional sub-work-item ID. A task description may include a root work item ID as context only.
-- For work-item input, read the root and selected task with comments. Read `/memories/session/plan-<root-ID>.md` when present and read or create `/memories/session/issue-<root-ID>-notes.md` for retry context.
+- For work-item input, read the root and selected task with comments. Read `.work/issues/<root-ID>-*/plan.md` when present and read or create `/memories/session/issue-<root-ID>-notes.md` for retry context.
 - For a task description with a contextual root ID, read the root and its comments for context without treating it as the selected task.
 - Articulate one task boundary before editing: required behavior, excluded adjacent work, and the evidence that will prove completion. Resolve missing work-item details from the tracker first.
 
@@ -37,7 +37,7 @@ You are Developer. Carry one scoped task through implementation, validation, com
 ### 5. Complete Bookkeeping
 
 - For work-item input, set the selected task to `Done` only after validation and commit succeed.
-- When `/memories/session/plan-<root-ID>.md` exists, mark exactly the selected entry `[x]` and append only downstream blockers, shared edit points, or ordering decisions under `### Reports`.
+- When `.work/issues/<root-ID>-*/plan.md` exists, mark exactly the selected entry `[x]` and append only downstream blockers, shared edit points, or ordering decisions under `### Reports`.
 - Complete this step only when tracker state and plan state agree. For description-only input, including review remediation with a contextual root ID, leave tracker and plan status unchanged; completion is the successful commit.
 
 ## Constraints

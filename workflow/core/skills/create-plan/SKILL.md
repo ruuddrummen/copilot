@@ -14,7 +14,7 @@ You receive one root work item ID.
 2. Derive dependencies from explicit relationships and task content. Include only dependencies among tasks in this plan; reject cycles.
 3. Order ready tasks first and dependents after their prerequisites. Mark tasks already complete in the tracker as `[x]` and all others as `[ ]`.
 4. When sub-work items exist, include each exactly once. When none exist, include the root itself as the sole task.
-5. Create or replace `/memories/session/plan-<root-ID>.md` using the format below. Preserve still-relevant reports for retained tasks.
+5. Create or replace `.work/issues/<root-ID>-<slug>/plan.md` (`<slug>`: kebab-case root work item title) using the format below. Preserve still-relevant reports for retained tasks.
 6. Return only after every included task, status, and dependency agrees with the work items read in step 1.
 
 ## Output
