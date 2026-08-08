@@ -11,8 +11,8 @@ tools:
     ado-remote-mcp/wit_get_work_items_batch_by_ids,
     ado-remote-mcp/wit_list_work_item_comments,
   ]
-model: Claude Haiku 4.5 (copilot)
+model: GPT-5.6 Luna (copilot)
 user-invocable: false
 ---
 
-Read the create-plan skill and follow it exactly. You receive a root work item ID as input.
+Invoke the `/create-plan` skill and follow it exactly. You receive a root work item ID as input.

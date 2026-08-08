@@ -1,60 +1,46 @@
 ---
 name: developer-loop
-description: "Run Developer in a loop to autonomously complete all tasks under a work item. Use when: you want Developer to work through every sub-task on a work item until done; implement work items; autonomous coding loop; run all tasks."
+description: "Complete a root work item and its sub-work items by delegating each ready task to Developer. Use for autonomous implementation of a work item tree."
 argument-hint: "Root work item ID (e.g. 123)"
 ---
 
-## Prerequisites
+## Input
 
-A work item ID **must** be provided. If missing, ask the user for it.
+A root work item ID is required. Ask for it when absent.
 
 ## Flow
 
 ### 1. Create Plan
 
-If you have all work items in your context, use the `create-plan` skill. In all other cases, **always invoke the Planner agent** to create the plan file, and ONLY provide the root work item ID. Do not read or analyze work items yourself, do not create the plan file yourself, and do not invoke the `create-plan` skill directly. The Planner agent handles all of this for you — it reads the work items, analyzes dependencies, creates the plan file, and returns control to you when done.
+Invoke Planner with only the root work item ID. Continue when Planner has created `/memories/session/plan-<root-ID>.md`; otherwise enter [Recovery](#recovery).
 
 ### 2. Prepare branch
 
-If you are on the `main` or a `release/*` branch, create and switch to a new branch named `(feature|hotfix)/dev-<root-ID>` before starting the loop.
+Record the current commit as the review baseline. On `main` or `release/*`, create and switch to `feature/dev-<root-ID>`; use `hotfix/dev-<root-ID>` when the root work item explicitly calls for a hotfix.
 
-### 2. Loop
+### 3. Loop
 
-Repeat until all tasks are complete:
+Repeat:
 
-1. **Read the plan file** at `/memories/session/plan-<work-item-ID>.md`.
-2. **Pick the next task**: select an unchecked task (`[ ]`) whose dependencies are all checked (`[x]`). Use your judgment to pick the best candidate — consider reports from completed tasks (in the `### Reports` section of the plan file) that may indicate blockers, risks, or ordering recommendations. Default to list order when there is no reason to deviate.
-3. **Select a model** for Developer to use on this task, based on the task description and your knowledge of the models available to you. Consider the complexity of the task. Available models: `GPT 5.6 Luna` (simple or docs only), `Claude Sonnet 5` (implementation work), `Claude Opus 5` (for critical, complex or error-sensitive tasks where quality is paramount).
-3. **Invoke Developer** with both the **root work item ID** and the **selected sub-work item ID**. Do not tell Developer which approach to take or provide additional context beyond the work item IDs — Developer reads the plan file and work items themselves.
-4. **Check Developer's response** for a status keyword:
-   - **`SUCCESS`**: Continue to the next iteration (step 1).
-   - **`ALL_ISSUES_CLOSED`**: Exit the loop — all work is done.
-   - **`FAILED`**: Enter the [Error Recovery](#error-recovery) flow.
-   - **No recognized keyword**: Report this to the user, but determine success or failure based on the response and continue accordingly.
-5. **Surface proposed learnings.** If Developer's response includes a `### Proposed Learning`, or a loop-level pattern emerges, follow the Orchestrator's `## Upstream learnings` flow: summarise, recommend, consult the user, file only on approval. Apply the full bar — **stack-agnostic** and **workflow scope** (would adoption edit a file under `workflow/` and change agent behaviour?). Coding tips belong in repo conventions.
+1. Read `/memories/session/plan-<root-ID>.md`.
+2. When every task is checked (`[x]`), leave the loop.
+3. Select an unchecked task whose listed dependencies are checked. Use `### Reports` to account for downstream blockers or ordering changes; otherwise use list order. If no task is ready, enter [Recovery](#recovery) with the dependency deadlock.
+4. Select Developer's model: `GPT 5.6 Luna` for simple or documentation tasks, `Claude Sonnet 5` for implementation, or `Claude Opus 5` for critical, complex, or error-sensitive work.
+5. Invoke Developer with only the root ID and selected sub-work-item ID. When the selected plan entry is the root task, provide only the root ID.
+6. Accept `SUCCESS` only when the response contains that single status keyword and the selected plan entry is now checked, then repeat from step 1. On `ALL_ISSUES_CLOSED`, invoke Planner to refresh the plan and leave the loop only when every entry is checked. For `FAILED`, an empty response, conflicting status keywords, or an unmet status condition, enter [Recovery](#recovery).
 
-### 3. Review
+### 4. Review
 
-Invoke `/code-review` on the branch when all tasks are complete. Spawn review agents with GPT 5.6 Sol. Let reviewers compare to the commit from which implementation started. Triage findings and let a Developer agent address accepted findings. Do another review only if findings were significant.
+Invoke code-review with GPT 5.6 Sol and compare the branch to the recorded baseline. Triage every finding, then remediate accepted findings directly:
 
-### 4. Completion
+1. Send all accepted findings to one Developer when they form one coherent task. Otherwise partition them into non-overlapping logical groups and invoke one Developer per group sequentially.
+2. Provide each group as the task description, including the exact findings and the root work item ID as context for the originating spec and commit traceability. State that the root ID is context only; Developer must leave tracker and plan status unchanged.
+3. Require `SUCCESS` for each group; enter [Recovery](#recovery) for any other response. After all groups succeed, rerun code-review against the same baseline. Continue until no accepted finding remains.
 
-When all tasks are done (all checkboxes marked `[x]` or Developer returns `ALL_ISSUES_CLOSED`):
+### 5. Completion
 
-1. Summarize what was accomplished.
-2. Present follow-up options to the user.
+Complete only when the latest plan has every task checked and review has no unaddressed accepted finding. Summarize the completed work and present relevant follow-up options.
 
-## 5. Single Task Path
+## Recovery
 
-When the root work item has no sub-work items:
-
-1. Invoke **Developer** with the root work item ID. No Planner, no plan file.
-2. Check Developer's response for a status keyword and handle as in step 2.4 above.
-3. On completion, summarize and present follow-up options.
-
-## 6. Error Recovery
-
-When Developer fails (returns `FAILED`, no keyword, or an empty response):
-
-- If the developer provided a response, triage the failure. If you can't fix it, report the error to the user.
-- If the response is empty or does not contain a recognized status keyword, report to the user. Probable cause: `chat.agent.maxRequests` has been exceeded.
+Present the failed step and available evidence, then follow Orchestrator's `## Handling Errors` procedure. Resume from the plan after a successful retry; preserve unchecked state when skipping or aborting.

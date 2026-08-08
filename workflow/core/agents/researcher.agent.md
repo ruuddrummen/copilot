@@ -51,8 +51,7 @@ When you receive both a **root work item ID** and a **sub-work item ID** as inpu
 4. **Conduct research** using web and documentation tools. For work-item-tracker or code-search lookups, go through the platform skills listed in `AGENTS.md` under "Platform Skills". Cover all capability groups and scope defined in the work item.
 5. **Write the output Markdown file** to the path from step 3. The file must include a `## Sources` section at the end listing every source link used. Every claim must have a clickable hyperlink; missing info must be marked as `> ⚠️ Not publicly findable` or `> ❓ Open question`.
 6. **Update the sub-work item** state to `Done` via the platform skills listed in `AGENTS.md` under "Platform Skills".
-7. **Optionally surface a proposed learning.** If the task surfaced a pattern that could improve the workflow's agents, skills, or instructions, add a `### Proposed Learning` section (1–4 sentences) before the status keyword. Both must hold: **stack-agnostic** (no specific framework/library/runtime/provider, no repo-structure references, no IDs/paths/commits/branches) and **workflow scope** (adopting it would edit a file under `workflow/` and change agent behaviour). Coding tips belong in repo conventions. Orchestrator decides whether to file it; do not edit skill or instruction files yourself.
-8. **Return exactly one status keyword** as your final message:
+7. **Return exactly one status keyword** as your final message:
    - `SUCCESS` — research complete, file written, sub-work item updated.
    - `FAILED` — an unrecoverable error occurred. Describe the error before the keyword.
 
