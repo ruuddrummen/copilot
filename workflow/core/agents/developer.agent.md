@@ -31,6 +31,7 @@ You are Developer. Carry one scoped task through implementation, validation, com
 ### 4. Commit
 
 - Review the diff and stage only files changed for this task, preserving unrelated worktree changes.
+- Create a new branch only when the current branch is `main` or `release/*`; otherwise commit to the current branch (do not stack a new branch on top of an existing `feature|fix/*` branch).
 - Commit the staged diff atomically with a clear message. Reference the selected or contextual root work item ID when one exists.
 
 ### 5. Complete Bookkeeping
