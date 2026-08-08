@@ -1,6 +1,6 @@
 ---
 name: Developer
-description: "Autonomous task worker. Use when: implementing a single task from a work item, committing completed work with traceability."
+description: "Autonomous task worker. Use when: implementing a single task from a description or from a work item. Developer reads the work item, implements the task, validates it, commits it, and reports back."
 tools:
   [vscode/memory, vscode/toolSearch, execute, read, agent, 'io.github.upstash/context7/*', edit, search, web/fetch, io.github.tavily-ai/tavily-mcp/tavily_extract, io.github.tavily-ai/tavily-mcp/tavily_search, todo]
 ---

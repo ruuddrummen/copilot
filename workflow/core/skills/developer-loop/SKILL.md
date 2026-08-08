@@ -24,7 +24,7 @@ Repeat until all tasks are complete:
 
 1. **Read the plan file** at `/memories/session/plan-<work-item-ID>.md`.
 2. **Pick the next task**: select an unchecked task (`[ ]`) whose dependencies are all checked (`[x]`). Use your judgment to pick the best candidate — consider reports from completed tasks (in the `### Reports` section of the plan file) that may indicate blockers, risks, or ordering recommendations. Default to list order when there is no reason to deviate.
-3. **Select a model** for Developer to use on this task, based on the task description and your knowledge of the models available to you. Consider the complexity of the task. Available models: `Claude Haiku 4.5` / `GPT 5.4-mini` (simple or docs only), `Claude Sonnet 4.6` / `GPT 5.4` (simple implementation work), `Claude Opus 4.8` / `GPT 5.5`  (for critical, complex or error-sensitive tasks where quality is paramount).
+3. **Select a model** for Developer to use on this task, based on the task description and your knowledge of the models available to you. Consider the complexity of the task. Available models: `GPT 5.6 Luna` (simple or docs only), `Claude Sonnet 5` (implementation work), `Claude Opus 5` (for critical, complex or error-sensitive tasks where quality is paramount).
 3. **Invoke Developer** with both the **root work item ID** and the **selected sub-work item ID**. Do not tell Developer which approach to take or provide additional context beyond the work item IDs — Developer reads the plan file and work items themselves.
 4. **Check Developer's response** for a status keyword:
    - **`SUCCESS`**: Continue to the next iteration (step 1).
@@ -33,14 +33,18 @@ Repeat until all tasks are complete:
    - **No recognized keyword**: Report this to the user, but determine success or failure based on the response and continue accordingly.
 5. **Surface proposed learnings.** If Developer's response includes a `### Proposed Learning`, or a loop-level pattern emerges, follow the Orchestrator's `## Upstream learnings` flow: summarise, recommend, consult the user, file only on approval. Apply the full bar — **stack-agnostic** and **workflow scope** (would adoption edit a file under `workflow/` and change agent behaviour?). Coding tips belong in repo conventions.
 
-### 3. Completion
+### 3. Review
+
+Invoke `/code-review` on the branch when all tasks are complete. Spawn review agents with GPT 5.6 Sol. Let reviewers compare to the commit from which implementation started. Triage findings and let a Developer agent address accepted findings. Do another review only if findings were significant.
+
+### 4. Completion
 
 When all tasks are done (all checkboxes marked `[x]` or Developer returns `ALL_ISSUES_CLOSED`):
 
 1. Summarize what was accomplished.
 2. Present follow-up options to the user.
 
-## Single Task Path
+## 5. Single Task Path
 
 When the root work item has no sub-work items:
 
@@ -48,7 +52,7 @@ When the root work item has no sub-work items:
 2. Check Developer's response for a status keyword and handle as in step 2.4 above.
 3. On completion, summarize and present follow-up options.
 
-## Error Recovery
+## 6. Error Recovery
 
 When Developer fails (returns `FAILED`, no keyword, or an empty response):
 
